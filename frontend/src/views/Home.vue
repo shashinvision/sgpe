@@ -1,5 +1,5 @@
 <template>
-  <div class="container home"><Convenios /></div>
+  <b-container fluid><Convenios /></b-container>
 </template>
 
 <script>

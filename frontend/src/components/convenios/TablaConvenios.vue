@@ -210,9 +210,7 @@
     </b-row>
 
     <!-- añadir modal -->
-    <b-modal hide-footer id="addConvenioModal" :title="modalAddEdit.title">
-      <div>Modal add o edit convenio</div>
-    </b-modal>
+    <AddModal :modalAddEdit="modalAddEdit" />
 
     <!-- Info modal -->
     <b-modal
@@ -250,7 +248,9 @@
 </template>
 
 <script>
+import AddModal from "./AddModal.vue";
 export default {
+  components: { AddModal },
   data() {
     return {
       items: [
@@ -365,7 +365,6 @@ export default {
           sortable: true,
           sortDirection: "desc",
         },
-
         {
           key: "isActive",
           label: "Estado Convenio",
@@ -422,7 +421,7 @@ export default {
       } else {
         this.modalAddEdit.title = "Editar Convenio";
       }
-      this.$root.$emit("bv::show::modal", "addConvenioModal");
+      this.$root.$emit("bv::show::modal", "addEditConvenioModal");
     },
     resetInfoModal() {
       this.infoModal.title = "";
