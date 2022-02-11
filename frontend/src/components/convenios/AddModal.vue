@@ -3,7 +3,7 @@
   <b-modal
     hide-footer
     id="addEditConvenioModal"
-    :title="modalAddEdit.title"
+    :title="infoModal.title"
     size="xl"
   >
     <b-row class="my-1">
@@ -15,6 +15,9 @@
           id="nombreEmpresa"
           placeholder="Nombre empresa..."
           size="sm"
+          :value="
+            infoModal.content.name.first + ' ' + infoModal.content.name.last
+          "
         ></b-form-input>
       </b-col>
     </b-row>
@@ -23,7 +26,12 @@
         <label for="inicioConvenio" size="sm">Inicio:</label>
       </b-col>
       <b-col sm="10">
-        <b-form-input type="date" id="inicioConvenio" size="sm"></b-form-input>
+        <b-form-input
+          type="date"
+          id="inicioConvenio"
+          size="sm"
+          :value="infoModal.content.dateStart"
+        ></b-form-input>
       </b-col>
     </b-row>
     <b-row class="my-1">
@@ -31,7 +39,12 @@
         <label for="finConvenio" size="sm">Fin:</label>
       </b-col>
       <b-col sm="10">
-        <b-form-input type="date" id="finConvenio" size="sm"></b-form-input>
+        <b-form-input
+          type="date"
+          id="finConvenio"
+          size="sm"
+          :value="infoModal.content.dateEnd"
+        ></b-form-input>
       </b-col>
     </b-row>
     <b-row class="my-1">
@@ -39,6 +52,13 @@
         <label for="documentoConvenio" size="sm">Archivo:</label>
       </b-col>
       <b-col sm="10">
+        <a
+          v-if="infoModal.title != 'Añadir Convenio'"
+          :href="infoModal.content.document"
+          target="_blank"
+        >
+          {{ infoModal.content.document }}
+        </a>
         <b-form-file
           accept=".jpg, .jpeg, .png, .pdf"
           v-model="archivo"
@@ -63,7 +83,7 @@ export default {
     };
   },
   props: {
-    modalAddEdit: {
+    infoModal: {
       type: Object,
       default: () => {
         return {};

@@ -210,7 +210,7 @@
     </b-row>
 
     <!-- añadir modal -->
-    <AddModal :modalAddEdit="modalAddEdit" />
+    <AddModal :infoModal="infoModal" />
 
     <!-- Info modal -->
     <b-modal
@@ -258,8 +258,8 @@ export default {
           isActive: true,
           id: 40,
           name: { first: "Dickerson", last: "Macdonald" },
-          dateStart: "01-01-2022",
-          dateEnd: "31-12-2022",
+          dateStart: "2022-01-01",
+          dateEnd: "2022-12-31",
           addBy: "Felipe Mancilla",
           passedBy: "Jhon Doe",
           document: `documents/document.pdf`,
@@ -389,9 +389,12 @@ export default {
       infoModal: {
         id: "info-modal",
         title: "",
-        content: "",
+        content: {
+          name: { first: "", last: "" },
+          dateStart: "",
+          document: "",
+        },
       },
-      modalAddEdit: { title: "" },
     };
   },
   computed: {
@@ -410,22 +413,28 @@ export default {
   },
   methods: {
     info(item, index, button) {
-      this.infoModal.title = `Acciones para el ID convenio #${item.id}`;
+      this.infoModal.title = `Convenio #${item.id}`;
       // this.infoModal.content = JSON.stringify(item, null, 2);
       this.infoModal.content = item;
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
     },
     addEdit(e) {
       if (e.target.id == "add") {
-        this.modalAddEdit.title = "Añadir Convenio";
+        this.infoModal.title = "Añadir Convenio";
       } else {
-        this.modalAddEdit.title = "Editar Convenio";
+        this.infoModal.title = "Convenio #" + this.infoModal.content.id;
+        console.log("DataSet", this.infoModal.content);
       }
       this.$root.$emit("bv::show::modal", "addEditConvenioModal");
     },
     resetInfoModal() {
       this.infoModal.title = "";
-      this.infoModal.content = "";
+      this.infoModal.content = {
+        name: { first: "", last: "" },
+        dateStart: "",
+        dateEnd: "",
+        document: "",
+      };
     },
     onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
