@@ -38,24 +38,24 @@ Route::group([
             'user',
             'AuthController@user'
         );
-        Route::get(
-            '/task/{id?}',
-            'TaskController@index'
-        );
-        Route::get(
-            '/task/detail/{id}',
-            [TaskController::class, 'show']
-        );
-        Route::post(
-            '/task',
-            [TaskController::class, 'store']
-        );
-        Route::post(
-            '/task/edit/{id}',
-            [TaskController::class, 'update']
-        );
-        Route::post('/task/delete/{id}', function ($id) {
-            return TaskController::delete($id);
-        });
+        // Route::get(
+        //     '/task/{id?}',
+        //     'TaskController@index'
+        // );
+        // Route::get(
+        //     '/task/detail/{id}',
+        //     [TaskController::class, 'show']
+        // );
+        // Route::post(
+        //     '/task',
+        //     [TaskController::class, 'store']
+        // );
+        // Route::post(
+        //     '/task/edit/{id}',
+        //     [TaskController::class, 'update']
+        // );
+        // Route::post('/task/delete/{id}', function ($id) {
+        //     return TaskController::delete($id);
+        // });
     });
 });
