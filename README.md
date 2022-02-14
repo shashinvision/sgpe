@@ -70,6 +70,12 @@ php artisan db:seed
 php artisan passport:install
 ```
 
+# IMPORTANTE!: solo en caso de hacer un migrate fresh se debe hacer un:
+
+```
+php artisan passport:install --force
+```
+
 # Otro metodo para la integración de la BBDD es usar tu gestor de MYSQL favorito (DBeaver, MysqlWorkBench, etc) luego crear la Base de datos UTF-8 llamada prueba
 
 # luego de crear la BBDD tenemos importar el archivo .SQL en la carpeta docs/SQL.
