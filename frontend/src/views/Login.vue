@@ -44,7 +44,7 @@
         >
           Login
         </button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+        <!-- <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p> -->
       </form>
     </main>
   </b-container>
@@ -69,7 +69,7 @@ export default {
   mounted() {},
 
   methods: {
-    ...mapActions('login', {
+    ...mapActions("access", {
       login: "loginAction",
     }),
     async onSubmit() {

@@ -34,7 +34,9 @@
         </b-nav-item-dropdown> -->
 
         <b-button size="sm" class="my-2 my-sm-0" to="Login">Login</b-button>
-        <b-button size="sm" class="my-2 my-sm-0">Logout</b-button>
+        <b-button size="sm" class="my-2 my-sm-0" @click="logoutNow"
+          >Logout</b-button
+        >
 
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
@@ -52,6 +54,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "SgpeHeader",
 
@@ -61,7 +65,15 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    ...mapActions("access", {
+      logout: "logoutAction",
+    }),
+    logoutNow() {
+      this.logout();
+      this.$router.push({ name: "Login" });
+    },
+  },
 };
 </script>
 
