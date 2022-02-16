@@ -15,10 +15,10 @@ class CreateConveniosTable extends Migration
     {
         Schema::create('convenios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('created_by_user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('approved_by_user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('companys_id')->constrained('companys')->cascadeOnDelete();
-            $table->foreignId('states_id')->constrained('states')->cascadeOnDelete();
+            $table->foreignId('created_by_user_id')->constrained('users');
+            $table->foreignId('approved_by_user_id')->nullable()->constrained('users');
+            $table->foreignId('companys_id')->constrained('companys');
+            $table->foreignId('states_id')->constrained('states');
             $table->string("document_path");
             $table->date('date_start');
             $table->date('date_end');
