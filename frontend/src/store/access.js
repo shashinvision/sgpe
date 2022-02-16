@@ -1,6 +1,6 @@
 import { baseURL } from "./globalData";
 
-const login = {
+const access = {
   namespaced: true,
   state: {
     API: {
@@ -117,4 +117,4 @@ const login = {
   },
 };
 
-export default login;
+export default access;
