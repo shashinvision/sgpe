@@ -9,9 +9,10 @@
         width="72"
         height="57"
       /> -->
-        <h1 class="h3 mb-3 fw-normal">Please login</h1>
+        <h1 class="h3 mb-3 fw-normal">Inicio de sesión</h1>
 
         <div class="form-floating">
+          <label for="floatingInput">Email address</label>
           <input
             type="email"
             class="form-control"
@@ -19,9 +20,9 @@
             placeholder="name@example.com"
             v-model="dataLogin.email"
           />
-          <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating">
+          <label for="floatingPassword">Password</label>
           <input
             type="password"
             class="form-control"
@@ -29,7 +30,6 @@
             placeholder="Password"
             v-model="dataLogin.password"
           />
-          <label for="floatingPassword">Password</label>
         </div>
         <!-- 
         <div class="checkbox mb-3">
@@ -37,13 +37,9 @@
             <input type="checkbox" value="remember-me" /> Remember me
           </label>
         </div> -->
-        <button
-          class="w-100 btn btn-lg btn-primary"
-          type="submit"
-          @click.prevent="onSubmit"
-        >
-          Login
-        </button>
+        <b-button class="w-100 btn btn-lg" variant="primary" @click="acceso">
+          Ingreso
+        </b-button>
         <!-- <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p> -->
       </form>
     </main>
@@ -72,7 +68,7 @@ export default {
     ...mapActions("access", {
       login: "loginAction",
     }),
-    async onSubmit() {
+    async acceso() {
       try {
         await this.login(this.dataLogin);
         this.$router.push({ name: "Home" });
