@@ -33,10 +33,6 @@
           <b-dropdown-item href="#">FA</b-dropdown-item>
         </b-nav-item-dropdown> -->
 
-        <b-button size="sm" class="my-2 my-sm-0" v-if="auth" @click="logoutNow"
-          >Logout</b-button
-        >
-
         <b-nav-item-dropdown v-if="auth" right>
           <!-- Using 'button-content' slot -->
           <template #button-content>
@@ -45,7 +41,9 @@
           </template>
           <b-dropdown-item href="#">Perfil</b-dropdown-item>
           <b-dropdown-item href="#">Administración</b-dropdown-item>
-          <b-dropdown-item href="#">Cerrar sesión</b-dropdown-item>
+          <b-dropdown-item v-if="auth" @click="logoutNow"
+            >Cerrar sesión</b-dropdown-item
+          >
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
