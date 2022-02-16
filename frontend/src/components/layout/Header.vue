@@ -33,12 +33,11 @@
           <b-dropdown-item href="#">FA</b-dropdown-item>
         </b-nav-item-dropdown> -->
 
-        <b-button size="sm" class="my-2 my-sm-0" to="Login">Login</b-button>
-        <b-button size="sm" class="my-2 my-sm-0" @click="logoutNow"
+        <b-button size="sm" class="my-2 my-sm-0" v-if="auth" @click="logoutNow"
           >Logout</b-button
         >
 
-        <b-nav-item-dropdown right>
+        <b-nav-item-dropdown v-if="auth" right>
           <!-- Using 'button-content' slot -->
           <template #button-content>
             <!-- <em>Menú</em> -->
@@ -54,7 +53,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "SgpeHeader",
@@ -62,9 +61,10 @@ export default {
   data() {
     return {};
   },
-
+  computed: {
+    ...mapState("access", ["auth"]),
+  },
   mounted() {},
-
   methods: {
     ...mapActions("access", {
       logout: "logoutAction",

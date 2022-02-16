@@ -1,13 +1,19 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import store from "../store";
 
 Vue.use(VueRouter);
+Vue.use(store);
 
 const routes = [
   {
     path: "/",
     name: "Home",
+    meta: {
+      // ruta protegida
+      requiresAuth: true,
+    },
     component: Home,
   },
   {
@@ -25,6 +31,26 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+// para proteger las rutas
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    // if (store.state.auth) {
+    // Acceso a vuex sin segmentar
+    //   next();
+    // } else {
+    //   next({ name: "Login" });
+    // }
+    if (store._modules.root.state.access.auth) {
+      // En caso que nuestro Vuex esté segmentado
+      next();
+    } else {
+      next({ name: "Login" });
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
