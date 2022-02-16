@@ -33,11 +33,14 @@
           <b-dropdown-item href="#">FA</b-dropdown-item>
         </b-nav-item-dropdown> -->
 
+        <b-button size="sm" class="my-2 my-sm-0" to="Login">Login</b-button>
+        <b-button size="sm" class="my-2 my-sm-0">Logout</b-button>
+
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template #button-content>
             <!-- <em>Menú</em> -->
-            <b>Menú</b>
+            <b id="colorMenu">Menú</b>
           </template>
           <b-dropdown-item href="#">Perfil</b-dropdown-item>
           <b-dropdown-item href="#">Administración</b-dropdown-item>
@@ -62,4 +65,8 @@ export default {
 };
 </script>
 
-<style lang="css"></style>
+<style lang="css" scoped>
+#colorMenu {
+  color: white !important;
+}
+</style>
