@@ -11,12 +11,19 @@
         <label for="inicioConvenio" size="sm">Empresa:</label>
       </b-col>
       <b-col sm="10">
-        <b-form-input
+        <b-form-select
+          id="nombreEmpresa"
+          v-model="selected"
+          :options="options"
+          size="sm"
+        ></b-form-select>
+
+        <!-- <b-form-input
           id="nombreEmpresa"
           placeholder="Nombre empresa..."
           size="sm"
           :value="infoModal.content.name"
-        ></b-form-input>
+        ></b-form-input> -->
       </b-col>
     </b-row>
     <b-row class="my-1">
@@ -85,6 +92,14 @@ export default {
   data() {
     return {
       archivo: null,
+      selected: null,
+      options: [
+        { value: null, text: "Please select an option" },
+        { value: "a", text: "This is First option" },
+        { value: "b", text: "Selected Option" },
+        { value: { C: "3PO" }, text: "This is an option with object value" },
+        { value: "d", text: "This one is disabled", disabled: true },
+      ],
     };
   },
   props: {
