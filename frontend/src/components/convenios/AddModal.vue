@@ -15,7 +15,7 @@
           id="nombreEmpresa"
           placeholder="Nombre empresa..."
           size="sm"
-          v-model="data.name"
+          v-model="datos.name"
         ></b-form-input>
       </b-col>
     </b-row>
@@ -28,7 +28,7 @@
           type="date"
           id="inicioConvenio"
           size="sm"
-          v-model="data.dateStart"
+          v-model="datos.dateStart"
         ></b-form-input>
       </b-col>
     </b-row>
@@ -41,7 +41,7 @@
           type="date"
           id="finConvenio"
           size="sm"
-          v-model="data.dateEnd"
+          v-model="datos.dateEnd"
         ></b-form-input>
       </b-col>
     </b-row>
@@ -52,15 +52,15 @@
       <b-col sm="10">
         <a
           v-if="this.infoModal.title != 'Añadir Convenio'"
-          :href="data.document"
+          :href="this.infoModal.content.document"
           target="_blank"
         >
-          {{ data.document }}
+          {{ this.infoModal.content.document }}
         </a>
         <b-form-file
           accept=".jpg, .jpeg, .png, .pdf"
-          v-model="archivo"
-          :state="Boolean(archivo)"
+          v-model="datos.archivo"
+          :state="Boolean(datos.archivo)"
           placeholder="Elija un archivo o suéltelo aquí..."
           drop-placeholder="Suelta el archivo aquí..."
           size="sm"
@@ -84,15 +84,7 @@ export default {
   name: "SgpeAddmodal",
 
   data() {
-    return {
-      archivo: null,
-      data: {
-        name: this.infoModal.content.name,
-        dateStart: this.infoModal.content.dateStart,
-        dateEnd: this.infoModal.content.dateEnd,
-        document: this.infoModal.content.document,
-      },
-    };
+    return {};
   },
   props: {
     infoModal: {
@@ -104,23 +96,33 @@ export default {
   },
   computed: {
     ...mapState("access", ["user_data"]),
+    datos() {
+      const datos = {
+        name: this.infoModal.content.name,
+        dateStart: this.infoModal.content.dateStart,
+        dateEnd: this.infoModal.content.dateEnd,
+        archivo: null,
+      };
+      return datos;
+    },
   },
-  mounted() {},
 
   methods: {
     ...mapActions("convenios", {
       setConvenios: "setConveniosAction",
+      updateConvenios: "updateConveniosAction",
     }),
     addEdit() {
       if (this.infoModal.title === "Añadir Convenio") {
         // Code to Add
+        // console.log("datos en add", this.datos);
         // console.log("this.infoModal.content", this.infoModal);
-
-        this.setConvenios(this.data);
+        this.setConvenios(this.datos);
       } else {
         // Code to Edit
         // console.log("this.infoModal.content", this.infoModal.content);
-        alert("edit");
+        // console.log("datos en edit", this.datos);
+        this.updateConvenios(this.datos);
       }
     },
   },
