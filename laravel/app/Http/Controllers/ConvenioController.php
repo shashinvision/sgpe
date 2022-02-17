@@ -35,7 +35,8 @@ class ConvenioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        return Convenio::create($request->all());
     }
 
     /**
@@ -69,7 +70,10 @@ class ConvenioController extends Controller
      */
     public function update(Request $request, Convenio $convenio)
     {
-        //
+
+        $task = Convenio::findOrFail($id);
+        $task->update($request->all(['document_path', 'date_start', 'date_end', 'companys_id']));
+        return $task;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ConvenioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,14 @@ Route::group([
             'user',
             'AuthController@user'
         );
+        Route::post(
+            '/convenio',
+            [ConvenioController::class, 'store']
+        );
+        Route::post(
+            '/convenio/edit/{id}',
+            [ConvenioController::class, 'update']
+        );
         // Route::get(
         //     '/task/{id?}',
         //     'TaskController@index'
@@ -46,14 +55,7 @@ Route::group([
         //     '/task/detail/{id}',
         //     [TaskController::class, 'show']
         // );
-        // Route::post(
-        //     '/task',
-        //     [TaskController::class, 'store']
-        // );
-        // Route::post(
-        //     '/task/edit/{id}',
-        //     [TaskController::class, 'update']
-        // );
+
         // Route::post('/task/delete/{id}', function ($id) {
         //     return TaskController::delete($id);
         // });

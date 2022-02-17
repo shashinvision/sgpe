@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Convenio extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'created_by_user_id',
+        'approved_by_user_id',
+        'companys_id',
+        'states_id',
+        'document_path',
+        'date_start',
+        'date_end',
+        'state',
+    ];
 }
