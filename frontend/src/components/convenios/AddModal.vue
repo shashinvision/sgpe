@@ -70,6 +70,11 @@
         <i id="formatos">Formatos aceptados: .jpg, .jpeg, .png, .pdf</i>
       </b-col>
     </b-row>
+    <b-row>
+      <b-col lg="12" class="my-1 d-flex flex-row-reverse">
+        <b-button variant="info" class="w-sm-100" id="add">Guardar</b-button>
+      </b-col>
+    </b-row>
   </b-modal>
 </template>
 
