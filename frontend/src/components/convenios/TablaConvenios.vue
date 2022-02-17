@@ -114,7 +114,8 @@
       class="mt-5"
     >
       <template #cell(name)="row">
-        {{ row.value.first }} {{ row.value.last }}
+        <!-- {{ row.value.first }} {{ row.value.last }} -->
+        {{ row.value }}
       </template>
 
       <template #cell(actions)="row">
@@ -139,10 +140,7 @@
             <ul>
               <li>
                 <b>Nombre Empresa: </b>
-                {{
-                  row.item.name.first + " " + row.item.name.last ||
-                  "Sin información"
-                }}
+                {{ row.item.name || "Sin información" }}
               </li>
               <li>
                 <b>Fecha inicio Convenio: </b>
@@ -257,7 +255,7 @@ export default {
         {
           isActive: true,
           id: 40,
-          name: { first: "Dickerson", last: "Macdonald" },
+          name: "Dickerson Macdonald",
           dateStart: "2022-01-01",
           dateEnd: "2022-12-31",
           addBy: "Felipe Mancilla",
@@ -268,7 +266,7 @@ export default {
         {
           isActive: false,
           id: 21,
-          name: { first: "Larsen", last: "Shaw" },
+          name: "Larsen Shaw",
           dateStart: "01-01-2022",
           dateEnd: "31-12-2022",
           _rowVariant: "danger",
@@ -276,7 +274,7 @@ export default {
         {
           isActive: false,
           id: 9,
-          name: { first: "Mini", last: "Navarro" },
+          name: "Mini Navarro",
           dateStart: "01-01-2022",
           dateEnd: "31-12-2022",
           _rowVariant: "danger",
@@ -284,7 +282,7 @@ export default {
         {
           isActive: false,
           id: 89,
-          name: { first: "Geneva", last: "Wilson" },
+          name: "Geneva Wilson",
           dateStart: "01-01-2022",
           dateEnd: "31-12-2022",
           _rowVariant: "danger",
@@ -292,7 +290,7 @@ export default {
         {
           isActive: true,
           id: 38,
-          name: { first: "Jami", last: "Carney" },
+          name: "Jami Carney",
           dateStart: "01-01-2022",
           dateEnd: "31-12-2022",
           _rowVariant: "success",
@@ -300,7 +298,7 @@ export default {
         {
           isActive: false,
           id: 27,
-          name: { first: "Essie", last: "Dunlap" },
+          name: "Essie Dunlap",
           dateStart: "01-01-2022",
           dateEnd: "31-12-2022",
           _rowVariant: "danger",
@@ -308,7 +306,7 @@ export default {
         {
           isActive: true,
           id: 40,
-          name: { first: "Thor", last: "Macdonald" },
+          name: "Thor Macdonald",
           dateStart: "01-01-2022",
           dateEnd: "31-12-2022",
           _rowVariant: "success",
@@ -316,7 +314,7 @@ export default {
         {
           isActive: true,
           id: 87,
-          name: { first: "Larsen", last: "Shaw" },
+          name: "Larsen Shaw",
           dateStart: "01-01-2022",
           dateEnd: "31-12-2022",
           _rowVariant: "success",
@@ -324,13 +322,13 @@ export default {
         {
           isActive: false,
           id: 26,
-          name: { first: "Mitzi", last: "Navarro" },
+          name: "Mitzi Navarro",
           _rowVariant: "danger",
         },
         {
           isActive: false,
           id: 22,
-          name: { first: "Genevieve", last: "Wilson" },
+          name: "Genevieve Wilson",
           dateStart: "01-01-2022",
           dateEnd: "31-12-2022",
           _rowVariant: "danger",
@@ -338,7 +336,7 @@ export default {
         {
           isActive: true,
           id: 38,
-          name: { first: "John", last: "Carney" },
+          name: "John Carney",
           dateStart: "01-01-2022",
           dateEnd: "31-12-2022",
           _rowVariant: "success",
@@ -346,7 +344,7 @@ export default {
         {
           isActive: false,
           id: 29,
-          name: { first: "Dick", last: "Dunlap" },
+          name: "Dick Dunlap",
           dateStart: "01-01-2022",
           dateEnd: "31-12-2022",
           _rowVariant: "danger",
@@ -390,8 +388,8 @@ export default {
         id: "info-modal",
         title: "",
         content: {
-          name: { first: "", last: "" },
-          dateStart: "",
+          name: "",
+          dateStar: "",
           document: "",
         },
       },
@@ -430,8 +428,8 @@ export default {
     resetInfoModal() {
       this.infoModal.title = "";
       this.infoModal.content = {
-        name: { first: "", last: "" },
-        dateStart: "",
+        name: "",
+        dateStar: "",
         dateEnd: "",
         document: "",
       };

@@ -15,9 +15,7 @@
           id="nombreEmpresa"
           placeholder="Nombre empresa..."
           size="sm"
-          :value="
-            infoModal.content.name.first + ' ' + infoModal.content.name.last
-          "
+          :value="infoModal.content.name"
         ></b-form-input>
       </b-col>
     </b-row>
