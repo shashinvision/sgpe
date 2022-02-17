@@ -114,10 +114,12 @@ export default {
     addEdit() {
       if (this.infoModal.title === "Añadir Convenio") {
         // Code to Add
+        // console.log("this.infoModal.content", this.infoModal);
+
         this.setConvenios(this.data);
       } else {
         // Code to Edit
-        console.log("this.infoModal.content", this.data);
+        // console.log("this.infoModal.content", this.infoModal.content);
         alert("edit");
       }
     },
