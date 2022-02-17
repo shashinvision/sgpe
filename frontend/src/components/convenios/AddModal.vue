@@ -72,7 +72,9 @@
     </b-row>
     <b-row>
       <b-col lg="12" class="my-1 d-flex flex-row-reverse">
-        <b-button variant="info" class="w-sm-100" id="add">Guardar</b-button>
+        <b-button variant="info" class="w-sm-100" id="add" @click="addEdit"
+          >Guardar</b-button
+        >
       </b-col>
     </b-row>
   </b-modal>
@@ -98,7 +100,17 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    addEdit() {
+      if (this.infoModal.title === "Añadir Convenio") {
+        // Code to Save
+        alert("save");
+      } else {
+        // COde to Edit
+        alert("edit");
+      }
+    },
+  },
 };
 </script>
 
