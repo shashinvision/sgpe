@@ -12,9 +12,12 @@ class ConvenioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id = 1)
     {
-        //
+        /*
+        * Si el $id es mayor a 1 se verán los datos por el id de la compañía.
+        * Si el $id es igual a 1 se verán todos los datos independiente de la compañía.
+         */
     }
 
     /**

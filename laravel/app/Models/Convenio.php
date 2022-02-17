@@ -10,6 +10,7 @@ class Convenio extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name_company_convenio',
         'created_by_user_id',
         'approved_by_user_id',
         'companys_id',

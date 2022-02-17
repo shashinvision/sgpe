@@ -15,6 +15,7 @@ class CreateConveniosTable extends Migration
     {
         Schema::create('convenios', function (Blueprint $table) {
             $table->id();
+            $table->string("name_company_convenio");
             $table->foreignId('created_by_user_id')->constrained('users');
             $table->foreignId('approved_by_user_id')->nullable()->constrained('users');
             $table->foreignId('companys_id')->constrained('companys');
