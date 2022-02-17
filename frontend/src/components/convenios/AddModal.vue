@@ -3,7 +3,7 @@
   <b-modal
     hide-footer
     id="addEditConvenioModal"
-    :title="infoModal.title"
+    :title="this.infoModal.title"
     size="xl"
   >
     <b-row class="my-1">
@@ -15,7 +15,7 @@
           id="nombreEmpresa"
           placeholder="Nombre empresa..."
           size="sm"
-          :value="infoModal.content.name"
+          v-model="data.name"
         ></b-form-input>
       </b-col>
     </b-row>
@@ -28,7 +28,7 @@
           type="date"
           id="inicioConvenio"
           size="sm"
-          :value="infoModal.content.dateStart"
+          v-model="data.dateStart"
         ></b-form-input>
       </b-col>
     </b-row>
@@ -41,7 +41,7 @@
           type="date"
           id="finConvenio"
           size="sm"
-          :value="infoModal.content.dateEnd"
+          v-model="data.dateEnd"
         ></b-form-input>
       </b-col>
     </b-row>
@@ -51,11 +51,11 @@
       </b-col>
       <b-col sm="10">
         <a
-          v-if="infoModal.title != 'Añadir Convenio'"
-          :href="infoModal.content.document"
+          v-if="this.infoModal.title != 'Añadir Convenio'"
+          :href="data.document"
           target="_blank"
         >
-          {{ infoModal.content.document }}
+          {{ data.document }}
         </a>
         <b-form-file
           accept=".jpg, .jpeg, .png, .pdf"
@@ -79,12 +79,19 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   name: "SgpeAddmodal",
 
   data() {
     return {
       archivo: null,
+      data: {
+        name: this.infoModal.content.name,
+        dateStart: this.infoModal.content.dateStart,
+        dateEnd: this.infoModal.content.dateEnd,
+        document: this.infoModal.content.document,
+      },
     };
   },
   props: {
@@ -95,16 +102,22 @@ export default {
       },
     },
   },
-
+  computed: {
+    ...mapState("access", ["user_data"]),
+  },
   mounted() {},
 
   methods: {
+    ...mapActions("convenios", {
+      setConvenios: "setConveniosAction",
+    }),
     addEdit() {
-      if (this.infoModal.title != "Añadir Convenio") {
-        // Code to Save
-        alert("save");
+      if (this.infoModal.title === "Añadir Convenio") {
+        // Code to Add
+        this.setConvenios(this.data);
       } else {
-        // COde to Edit
+        // Code to Edit
+        console.log("this.infoModal.content", this.data);
         alert("edit");
       }
     },
