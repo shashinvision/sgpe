@@ -206,10 +206,8 @@
         ></b-pagination>
       </b-col>
     </b-row>
-
     <!-- añadir modal -->
     <AddModal :infoModal="infoModal" />
-
     <!-- Info modal -->
     <b-modal
       :id="infoModal.id"
@@ -253,27 +251,7 @@ export default {
   components: { AddModal },
   data() {
     return {
-      items: [
-        {
-          isActive: true,
-          id: 40,
-          name: "Dickerson Macdonald",
-          dateStart: "2022-01-01",
-          dateEnd: "2022-12-31",
-          addBy: "Felipe Mancilla",
-          passedBy: "Jhon Doe",
-          document: `documents/document.pdf`,
-          _rowVariant: "success",
-        },
-        {
-          isActive: false,
-          id: 21,
-          name: "Larsen Shaw",
-          dateStart: "01-01-2022",
-          dateEnd: "31-12-2022",
-          _rowVariant: "danger",
-        },
-      ],
+      items: [],
       fields: [
         {
           key: "id",
@@ -320,6 +298,7 @@ export default {
       },
     };
   },
+
   computed: {
     ...mapState("convenios", ["convenios"]),
     sortOptions() {
@@ -332,9 +311,19 @@ export default {
     },
   },
   mounted() {
-    // Set the initial number of items
-    this.totalRows = this.items.length;
+    /*
+     ? importante
+     * Con el setTimeOut soluciono el problema de la reactividad del paso de los valores
+     *  de la props, se puede con una propiedad computada, pero inicia primero como objeto lo
+     * que genera error, por lo que un setTImeOut no genera este error si el primera valor es
+     * un arreglo vacío
+     */
     this.getConvenios();
+    setTimeout(() => {
+      this.items = this.convenios;
+      // Set the initial number of items
+      this.totalRows = this.items.length;
+    }, 500);
   },
   methods: {
     ...mapActions("convenios", {

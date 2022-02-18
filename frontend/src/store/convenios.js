@@ -12,7 +12,7 @@ const convenios = {
   },
   mutations: {
     getConveniosMutation(state, payload) {
-      // console.log("setConveniosMutation payload", payload);
+      console.log("getConveniosMutation payload", payload);
       state.convenios = payload;
     },
     setConveniosMutation(state, payload) {
@@ -40,7 +40,22 @@ const convenios = {
           return res.json();
         })
         .then((payload) => {
-          commit("getConveniosMutation", payload);
+          let dataConvenios = payload;
+          // console.log("dataConvenios payload", dataConvenios);
+
+          for (let i = 0; i < dataConvenios.length; i++) {
+            // console.log("dataconvenios", dataConvenios[i]);
+            if (dataConvenios[i].state == "Vigente") {
+              dataConvenios[i].isActive = true;
+              dataConvenios[i]._rowVariant = "success";
+            } else if (dataConvenios[i].state == "No vigente") {
+              dataConvenios[i].isActive = false;
+              dataConvenios[i]._rowVariant = "danger";
+            }
+          }
+          console.log("getConveniosAction payload", dataConvenios);
+
+          commit("getConveniosMutation", dataConvenios);
         })
         .catch((err) => {
           console.error("Error al intentar obtener los datos", err);
