@@ -12,7 +12,7 @@ const convenios = {
   },
   mutations: {
     getConveniosMutation(state, payload) {
-      console.log("getConveniosMutation payload", payload);
+      // console.log("getConveniosMutation payload", payload);
       state.convenios = payload;
     },
     setConveniosMutation(state, payload) {
@@ -53,7 +53,7 @@ const convenios = {
               dataConvenios[i]._rowVariant = "danger";
             }
           }
-          console.log("getConveniosAction payload", dataConvenios);
+          // console.log("getConveniosAction payload", dataConvenios);
 
           commit("getConveniosMutation", dataConvenios);
         })
@@ -99,7 +99,7 @@ const convenios = {
           return res.json();
         })
         .then((payload) => {
-          console.log("Respuesta insert", payload);
+          // console.log("Respuesta insert", payload);
 
           commit("setConveniosMutation", payload);
         })
