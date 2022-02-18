@@ -211,7 +211,7 @@
       </b-col>
     </b-row>
     <!-- añadir modal -->
-    <AddModal :infoModal="infoModal" />
+    <AddModal :infoModal="infoModal" @refrescar="datosTabla" />
     <!-- Info modal -->
     <b-modal
       :id="infoModal.id"
@@ -322,12 +322,8 @@ export default {
      * que genera error, por lo que un setTImeOut no genera este error si el primera valor es
      * un arreglo vacío
      */
-    this.getConvenios();
-    setTimeout(() => {
-      this.items = this.convenios;
-      // Set the initial number of items
-      this.totalRows = this.items.length;
-    }, 500);
+
+    this.datosTabla();
   },
   methods: {
     ...mapActions("convenios", {
@@ -365,6 +361,14 @@ export default {
     storageUrl(data) {
       const arreglo = data.split("/");
       return "http://localhost:8888/storage/" + arreglo[1];
+    },
+    datosTabla() {
+      this.getConvenios();
+      setTimeout(() => {
+        this.items = this.convenios;
+        // Set the initial number of items
+        this.totalRows = this.items.length;
+      }, 500);
     },
   },
 };
