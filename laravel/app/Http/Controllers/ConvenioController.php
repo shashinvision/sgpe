@@ -23,7 +23,7 @@ class ConvenioController extends Controller
         $convenios = null;
         if ($idCompanys > 1) {
             $convenios = DB::table('convenios as c')
-                ->select('c.id as id', 'c.name_company_convenio as name_company_convenio', 'uc.name as created_by_user', 'ua.name as approved_by_user', 'cp.name as company', 's.name as state', 'c.document_path', 'c.date_start', 'c.date_end')
+                ->select('c.id as id', 'c.name_company_convenio as name', 'uc.name as addBy', 'ua.name as passedBy', 'cp.name as company', 's.name as state', 'c.document_path as document', 'c.date_start', 'c.date_end')
                 ->join("users as uc", 'uc.id', "=", "c.created_by_user_id")
                 ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
                 ->join('companys as cp', 'cp.id', "=", "c.companys_id")
@@ -33,7 +33,7 @@ class ConvenioController extends Controller
                 ->get();
         } else {
             $convenios = DB::table('convenios as c')
-                ->select('c.id as id', 'c.name_company_convenio as name_company_convenio', 'uc.name as created_by_user', 'ua.name as approved_by_user', 'cp.name as company', 's.name as state', 'c.document_path', 'c.date_start', 'c.date_end')
+                ->select('c.id as id', 'c.name_company_convenio as name', 'uc.name as addBy', 'ua.name as passedBy', 'cp.name as company', 's.name as state', 'c.document_path as document', 'c.date_start', 'c.date_end')
                 ->join("users as uc", 'uc.id', "=", "c.created_by_user_id")
                 ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
                 ->join('companys as cp', 'cp.id', "=", "c.companys_id")

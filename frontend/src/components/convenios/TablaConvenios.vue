@@ -246,7 +246,9 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 import AddModal from "./AddModal.vue";
+
 export default {
   components: { AddModal },
   data() {
@@ -267,84 +269,6 @@ export default {
           isActive: false,
           id: 21,
           name: "Larsen Shaw",
-          dateStart: "01-01-2022",
-          dateEnd: "31-12-2022",
-          _rowVariant: "danger",
-        },
-        {
-          isActive: false,
-          id: 9,
-          name: "Mini Navarro",
-          dateStart: "01-01-2022",
-          dateEnd: "31-12-2022",
-          _rowVariant: "danger",
-        },
-        {
-          isActive: false,
-          id: 89,
-          name: "Geneva Wilson",
-          dateStart: "01-01-2022",
-          dateEnd: "31-12-2022",
-          _rowVariant: "danger",
-        },
-        {
-          isActive: true,
-          id: 38,
-          name: "Jami Carney",
-          dateStart: "01-01-2022",
-          dateEnd: "31-12-2022",
-          _rowVariant: "success",
-        },
-        {
-          isActive: false,
-          id: 27,
-          name: "Essie Dunlap",
-          dateStart: "01-01-2022",
-          dateEnd: "31-12-2022",
-          _rowVariant: "danger",
-        },
-        {
-          isActive: true,
-          id: 40,
-          name: "Thor Macdonald",
-          dateStart: "01-01-2022",
-          dateEnd: "31-12-2022",
-          _rowVariant: "success",
-        },
-        {
-          isActive: true,
-          id: 87,
-          name: "Larsen Shaw",
-          dateStart: "01-01-2022",
-          dateEnd: "31-12-2022",
-          _rowVariant: "success",
-        },
-        {
-          isActive: false,
-          id: 26,
-          name: "Mitzi Navarro",
-          _rowVariant: "danger",
-        },
-        {
-          isActive: false,
-          id: 22,
-          name: "Genevieve Wilson",
-          dateStart: "01-01-2022",
-          dateEnd: "31-12-2022",
-          _rowVariant: "danger",
-        },
-        {
-          isActive: true,
-          id: 38,
-          name: "John Carney",
-          dateStart: "01-01-2022",
-          dateEnd: "31-12-2022",
-          _rowVariant: "success",
-        },
-        {
-          isActive: false,
-          id: 29,
-          name: "Dick Dunlap",
           dateStart: "01-01-2022",
           dateEnd: "31-12-2022",
           _rowVariant: "danger",
@@ -389,13 +313,15 @@ export default {
         title: "",
         content: {
           name: "",
-          dateStar: "",
+          dateStart: "",
+          dateEnd: "",
           document: "",
         },
       },
     };
   },
   computed: {
+    ...mapState("convenios", ["convenios"]),
     sortOptions() {
       // Create an options list from our fields
       return this.fields
@@ -408,8 +334,12 @@ export default {
   mounted() {
     // Set the initial number of items
     this.totalRows = this.items.length;
+    this.getConvenios();
   },
   methods: {
+    ...mapActions("convenios", {
+      getConvenios: "getConveniosAction",
+    }),
     info(item, index, button) {
       this.infoModal.title = `Convenio #${item.id}`;
       // this.infoModal.content = JSON.stringify(item, null, 2);
@@ -429,7 +359,7 @@ export default {
       this.infoModal.title = "";
       this.infoModal.content = {
         name: "",
-        dateStar: "",
+        dateStart: "",
         dateEnd: "",
         document: "",
       };

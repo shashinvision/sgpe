@@ -8,8 +8,13 @@ const convenios = {
       baseURL,
       message: "",
     },
+    convenios: {},
   },
   mutations: {
+    getConveniosMutation(state, payload) {
+      // console.log("setConveniosMutation payload", payload);
+      state.convenios = payload;
+    },
     setConveniosMutation(state, payload) {
       // console.log("setConveniosMutation payload", payload);
       state.API.message = payload;
@@ -19,6 +24,28 @@ const convenios = {
     },
   },
   actions: {
+    async getConveniosAction({ commit, state }) {
+      // console.log("Data insert", data);
+
+      await fetch(state.API.baseURL + "/api/auth/convenios", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer " + store._modules.root.state.access.access_token,
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((payload) => {
+          commit("getConveniosMutation", payload);
+        })
+        .catch((err) => {
+          console.error("Error al intentar obtener los datos", err);
+        });
+    },
     async setConveniosAction({ commit, state }, payload) {
       // console.log("setConveniosAction commit, state", commit, state);
       // console.log("setConveniosAction payload", payload);
@@ -28,7 +55,7 @@ const convenios = {
       // );
 
       // console.log("token", store._modules.root.state.access.access_token);
-      console.log("document", payload.archivo);
+      // console.log("document", payload.archivo);
       const data = {
         name_company_convenio: payload.name,
         created_by_user_id: store._modules.root.state.access.user_data.id,
@@ -74,7 +101,7 @@ const convenios = {
       // );
 
       // console.log("token", store._modules.root.state.access.access_token);
-      console.log("document", payload.archivo);
+      // console.log("document", payload.archivo);
       const data = {
         name_company_convenio: payload.name,
         created_by_user_id: store._modules.root.state.access.user_data.id,
