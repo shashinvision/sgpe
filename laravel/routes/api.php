@@ -39,6 +39,10 @@ Route::group([
             'user',
             'AuthController@user'
         );
+        Route::get(
+            '/convenios',
+            [ConvenioController::class, 'index']
+        );
         Route::post(
             '/convenio',
             [ConvenioController::class, 'store']

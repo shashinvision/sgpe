@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Convenio;
 use Illuminate\Http\Request;
 
@@ -12,12 +13,34 @@ class ConvenioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id = 1)
+    public function index($idCompanys = 1)
     {
         /*
-        * Si el $id es mayor a 1 se verán los datos por el id de la compañía.
-        * Si el $id es igual a 1 se verán todos los datos independiente de la compañía.
-         */
+        * Si el $idCompanys es mayor a 1 se verán los datos por el id de la compañía.
+        * Si el $idCompanys es igual a 1 se verán todos los datos independiente de la compañía.
+        */
+
+        $convenios = null;
+        if ($idCompanys > 1) {
+            $convenios = DB::table('convenios as c')
+                ->select('c.id as id', 'c.name_company_convenio as name_company_convenio', 'uc.name as created_by_user', 'ua.name as approved_by_user', 'cp.name as company', 's.name as state', 'c.document_path', 'c.date_start', 'c.date_end')
+                ->join("users as uc", 'uc.id', "=", "c.created_by_user_id")
+                ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
+                ->join('companys as cp', 'cp.id', "=", "c.companys_id")
+                ->join('states as s', 's.id', "=", "c.states_id")
+                ->where('c.id_companys', $idCompanys)
+                ->get();
+        } else {
+            $convenios = DB::table('convenios as c')
+                ->select('c.id as id', 'c.name_company_convenio as name_company_convenio', 'uc.name as created_by_user', 'ua.name as approved_by_user', 'cp.name as company', 's.name as state', 'c.document_path', 'c.date_start', 'c.date_end')
+                ->join("users as uc", 'uc.id', "=", "c.created_by_user_id")
+                ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
+                ->join('companys as cp', 'cp.id', "=", "c.companys_id")
+                ->join('states as s', 's.id', "=", "c.states_id")
+                ->get();
+        }
+
+        return json_encode($convenios);
     }
 
     /**
