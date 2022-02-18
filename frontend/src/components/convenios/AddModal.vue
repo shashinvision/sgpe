@@ -51,12 +51,16 @@
       </b-col>
       <b-col sm="10">
         <a
-          v-if="this.infoModal.title != 'Añadir Convenio'"
-          :href="this.infoModal.content.document"
+          v-if="
+            this.infoModal.title != 'Añadir Convenio' &&
+            this.infoModal.content.document
+          "
+          :href="storageUrl(this.infoModal.content.document)"
           target="_blank"
         >
-          {{ this.infoModal.content.document }}
+          <b-icon icon="file-earmark-text-fill"></b-icon>
         </a>
+        <p v-else>Sin documento</p>
         <b-form-file
           accept=".jpg, .jpeg, .png, .pdf"
           v-model="datos.archivo"
@@ -135,6 +139,10 @@ export default {
         // console.log("datos en edit", this.datos);
         this.updateConvenios(this.datos);
       }
+    },
+    storageUrl(data) {
+      const arreglo = data.split("/");
+      return "http://localhost:8888/storage/" + arreglo[1];
     },
     limpieza() {
       this.datos.name = "";
