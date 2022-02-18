@@ -12,7 +12,7 @@
         <h1 class="h3 mb-3 fw-normal">Inicio de sesión</h1>
 
         <div class="form-floating">
-          <label for="floatingInput">Email address</label>
+          <label for="floatingInput">Email</label>
           <input
             type="email"
             class="form-control"

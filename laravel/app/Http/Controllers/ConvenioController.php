@@ -39,7 +39,8 @@ class ConvenioController extends Controller
     public function store(Request $request)
     {
 
-        return Convenio::create($request->all());
+        Convenio::create($request->all());
+        return json_encode("Convenio creado con éxito.");
     }
 
     /**

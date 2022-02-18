@@ -11,8 +11,11 @@ const convenios = {
   },
   mutations: {
     setConveniosMutation(state, payload) {
-      console.log("setConveniosMutation payload", payload);
+      // console.log("setConveniosMutation payload", payload);
       state.API.message = payload;
+    },
+    cleanMessageMutation(state) {
+      state.API.message = "";
     },
   },
   actions: {
@@ -107,6 +110,9 @@ const convenios = {
         .catch((err) => {
           console.error("Error al intentar ingresar", err);
         });
+    },
+    cleanMessageAction({ commit }) {
+      commit("cleanMessageMutation");
     },
   },
 };

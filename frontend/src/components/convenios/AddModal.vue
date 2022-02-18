@@ -70,6 +70,11 @@
     </b-row>
     <b-row>
       <b-col lg="12" class="my-1 d-flex flex-row-reverse">
+        <i class="mensaje">{{ API.message }}</i>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col lg="12" class="my-1 d-flex flex-row-reverse">
         <b-button variant="info" class="w-sm-100" id="add" @click="addEdit"
           >Guardar</b-button
         >
@@ -96,6 +101,7 @@ export default {
   },
   computed: {
     ...mapState("access", ["user_data"]),
+    ...mapState("convenios", ["API"]),
     datos() {
       const datos = {
         name: this.infoModal.content.name,
@@ -111,6 +117,7 @@ export default {
     ...mapActions("convenios", {
       setConvenios: "setConveniosAction",
       updateConvenios: "updateConveniosAction",
+      cleanMessage: "cleanMessageAction",
     }),
     addEdit() {
       if (this.infoModal.title === "Añadir Convenio") {
@@ -118,12 +125,22 @@ export default {
         // console.log("datos en add", this.datos);
         // console.log("this.infoModal.content", this.infoModal);
         this.setConvenios(this.datos);
+        setTimeout(() => {
+          this.limpieza();
+        }, 1000);
       } else {
         // Code to Edit
         // console.log("this.infoModal.content", this.infoModal.content);
         // console.log("datos en edit", this.datos);
         this.updateConvenios(this.datos);
       }
+    },
+    limpieza() {
+      this.datos.name = "";
+      this.datos.dateStart = "";
+      this.datos.dateEnd = "";
+      this.datos.archivo = null;
+      this.cleanMessage();
     },
   },
 };
@@ -132,6 +149,9 @@ export default {
 <style scoped>
 #formatos {
   font-size: 12px;
+  color: green;
+}
+.mensaje {
   color: green;
 }
 </style>
