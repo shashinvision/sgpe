@@ -62,38 +62,50 @@ const convenios = {
         });
     },
     async setConveniosAction({ commit, state }, payload) {
-      // console.log("setConveniosAction commit, state", commit, state);
-      // console.log("setConveniosAction payload", payload);
-      // console.log(
-      //   "store de access en store convenios ",
-      //   store._modules.root.state.access.user_data
-      // );
-
-      // console.log("token", store._modules.root.state.access.access_token);
-      // console.log("document", payload.archivo);
-      const data = {
-        name_company_convenio: payload.name,
-        created_by_user_id: store._modules.root.state.access.user_data.id,
-        companys_id: store._modules.root.state.access.user_data.id_companys,
-        states_id: 2,
-        document_path: payload.archivo.name,
-        date_start: payload.dateStart,
-        date_end: payload.dateEnd,
-        state: 1,
-      };
+      // const data = {
+      //   name_company_convenio: payload.name,
+      //   created_by_user_id: store._modules.root.state.access.user_data.id,
+      //   companys_id: store._modules.root.state.access.user_data.id_companys,
+      //   states_id: 2,
+      //   document_path: payload.archivo.name,
+      //   date_start: payload.dateStart,
+      //   date_end: payload.dateEnd,
+      //   state: 1,
+      // };
 
       // console.log("Data insert", data);
+
+      let data = new FormData();
+      data.append("name_company_convenio", payload.name);
+      data.append(
+        "created_by_user_id",
+        store._modules.root.state.access.user_data.id
+      );
+      data.append(
+        "companys_id",
+        store._modules.root.state.access.user_data.id_companys
+      );
+      data.append("states_id", 2);
+      data.append(
+        "document_path",
+        payload.archivo != null && payload.archivo != undefined
+          ? payload.archivo
+          : payload.document
+      );
+      data.append("date_start", payload.dateStart);
+      data.append("date_end", payload.dateEnd);
+      data.append("state", 1);
 
       await fetch(state.API.baseURL + "/api/auth/convenio", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          // "Content-Type": "application/json",
           Authorization:
             "Bearer " + store._modules.root.state.access.access_token,
           "X-Requested-With": "XMLHttpRequest",
         },
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-        // body: data, // body data type must match "Content-Type" header
+        // body: JSON.stringify(data), // body data type must match "Content-Type" header
+        body: data, // Cuando se usa FormData JSON.stringify, no se necesita body data type must match "Content-Type" header
       })
         .then((res) => {
           return res.json();

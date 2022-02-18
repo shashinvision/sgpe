@@ -164,9 +164,13 @@
               </li>
               <li>
                 <b>Documento : </b>
-                <a :href="row.item.document" target="_blank">{{
-                  row.item.document || "Sin documento"
-                }}</a>
+                <a
+                  v-if="row.item.document"
+                  :href="storageUrl(row.item.document)"
+                  target="_blank"
+                  ><b-icon icon="file-earmark-text-fill"></b-icon>
+                </a>
+                <p v-else>Sin documento</p>
               </li>
             </ul>
           </ul>
@@ -357,6 +361,10 @@ export default {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
+    },
+    storageUrl(data) {
+      const arreglo = data.split("/");
+      return "http://localhost:8888/storage/" + arreglo[1];
     },
   },
 };

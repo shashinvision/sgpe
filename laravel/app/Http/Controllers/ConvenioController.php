@@ -63,8 +63,12 @@ class ConvenioController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+        if ($request->hasFile('document_path')) {
+            $data['document_path'] = $request->file('document_path')->store('public');
+        }
 
-        Convenio::create($request->all());
+        Convenio::create($data);
         return json_encode("Convenio creado con éxito.");
     }
 

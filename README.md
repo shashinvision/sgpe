@@ -70,6 +70,12 @@ php artisan db:seed
 php artisan passport:install
 ```
 
+# para hacer el link simbolico al public del storage con el public de laravel
+
+```
+php artisan storage:link
+```
+
 # IMPORTANTE!: solo en caso de hacer un migrate fresh se debe hacer un:
 
 ```

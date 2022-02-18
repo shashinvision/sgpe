@@ -107,6 +107,7 @@ export default {
         name: this.infoModal.content.name,
         dateStart: this.infoModal.content.dateStart,
         dateEnd: this.infoModal.content.dateEnd,
+        document: this.infoModal.content.document,
         archivo: null,
       };
       return datos;
