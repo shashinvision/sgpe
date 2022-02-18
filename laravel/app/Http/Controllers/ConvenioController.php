@@ -29,6 +29,7 @@ class ConvenioController extends Controller
                 ->join('companys as cp', 'cp.id', "=", "c.companys_id")
                 ->join('states as s', 's.id', "=", "c.states_id")
                 ->where('c.id_companys', $idCompanys)
+                ->order('c.id', 'asc')
                 ->get();
         } else {
             $convenios = DB::table('convenios as c')
@@ -37,6 +38,7 @@ class ConvenioController extends Controller
                 ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
                 ->join('companys as cp', 'cp.id', "=", "c.companys_id")
                 ->join('states as s', 's.id', "=", "c.states_id")
+                ->orderBy('c.id', 'asc')
                 ->get();
         }
 
