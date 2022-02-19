@@ -88,6 +88,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import { baseURL } from "../../store/globalData";
 export default {
   name: "SgpeAddmodal",
 
@@ -146,7 +147,7 @@ export default {
     },
     storageUrl(data) {
       const arreglo = data.split("/");
-      return "http://localhost:8888/storage/" + arreglo[1];
+      return baseURL + "/storage/" + arreglo[1];
     },
     limpieza() {
       this.datos.name = "";
