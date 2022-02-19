@@ -236,12 +236,9 @@
           <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
         </button>
 
-        <router-link
-          :to="{ name: 'eliminar', params: { id: infoModal.id } }"
-          class="btn btn-danger"
-        >
+        <b-button @click="deleteItem" class="btn btn-danger">
           <b-icon icon="trash-fill" aria-hidden="true"></b-icon
-        ></router-link>
+        ></b-button>
       </div>
     </b-modal>
   </b-container>
@@ -331,6 +328,7 @@ export default {
   methods: {
     ...mapActions("convenios", {
       getConvenios: "getConveniosAction",
+      deleteConvenios: "deleteConveniosAction",
     }),
     info(item, index, button) {
       this.infoModal.title = `Convenio #${item.id}`;
@@ -346,6 +344,19 @@ export default {
         console.log("DataSet", this.infoModal.content);
       }
       this.$root.$emit("bv::show::modal", "addEditConvenioModal");
+    },
+    deleteItem() {
+      if (
+        confirm(
+          "¡Alerta!, ¿Estas seguro de querer eliminar este registro?.\n\rEl registro no se visualizará en la tabla después de esta acción, pero sus datos se conservará en la base de datos de forma interna."
+        )
+      ) {
+        this.deleteConvenios({ id: this.infoModal.content.id });
+        setTimeout(() => {
+          this.datosTabla();
+          this.$root.$emit("bv::hide::modal", "info-modal");
+        }, 500);
+      }
     },
     resetInfoModal() {
       this.infoModal.title = "";

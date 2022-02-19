@@ -51,6 +51,10 @@ Route::group([
             '/convenio/edit/{id}',
             [ConvenioController::class, 'update']
         );
+        Route::post(
+            '/convenio/delete/{id}',
+            [ConvenioController::class, 'destroy']
+        );
         // Route::get(
         //     '/task/{id?}',
         //     'TaskController@index'
@@ -60,8 +64,5 @@ Route::group([
         //     [TaskController::class, 'show']
         // );
 
-        // Route::post('/task/delete/{id}', function ($id) {
-        //     return TaskController::delete($id);
-        // });
     });
 });

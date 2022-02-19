@@ -29,6 +29,7 @@ class ConvenioController extends Controller
                 ->join('companys as cp', 'cp.id', "=", "c.companys_id")
                 ->join('states as s', 's.id', "=", "c.states_id")
                 ->where('c.id_companys', $idCompanys)
+                ->where('c.state', "=", "1")
                 ->order('c.id', 'asc')
                 ->get();
         } else {
@@ -38,6 +39,7 @@ class ConvenioController extends Controller
                 ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
                 ->join('companys as cp', 'cp.id', "=", "c.companys_id")
                 ->join('states as s', 's.id', "=", "c.states_id")
+                ->where('c.state', "=", "1")
                 ->orderBy('c.id', 'asc')
                 ->get();
         }
@@ -122,8 +124,11 @@ class ConvenioController extends Controller
      * @param  \App\Models\Convenio  $convenio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Convenio $convenio)
+    public function destroy(Convenio $convenio, Request $request, $id)
     {
-        //
+        $data = $request->all(['state']);
+        $respuesta = $convenio::findOrFail($id);
+        $respuesta->update($data);
+        return json_encode("Convenio eliminado con éxito.");
     }
 }

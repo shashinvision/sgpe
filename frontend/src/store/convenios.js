@@ -180,6 +180,35 @@ const convenios = {
           console.error("Error al intentar ingresar", err);
         });
     },
+    async deleteConveniosAction({ commit, state }, payload) {
+      const data = {
+        state: 0,
+      };
+      await fetch(
+        state.API.baseURL + "/api/auth/convenio/delete/" + payload.id,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer " + store._modules.root.state.access.access_token,
+            "X-Requested-With": "XMLHttpRequest",
+          },
+          body: JSON.stringify(data), // body data type must match "Content-Type" header
+        }
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then((payload) => {
+          // console.log("Respuesta insert", payload);
+
+          commit("setConveniosMutation", payload);
+        })
+        .catch((err) => {
+          console.error("Error al intentar ingresar", err);
+        });
+    },
     cleanMessageAction({ commit }) {
       commit("cleanMessageMutation");
     },
