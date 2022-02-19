@@ -156,6 +156,7 @@ export default {
       this.cleanMessage();
       // Para cerrar el modal y para abrir es igual pero se cambia el hide por show
       this.$root.$emit("bv::hide::modal", "addEditConvenioModal");
+      this.$root.$emit("bv::hide::modal", "info-modal");
       this.$emit("refrescar", "");
     },
   },
