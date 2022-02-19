@@ -131,7 +131,7 @@ const convenios = {
 
       // console.log("updateConveniosAction commit", commit);
       // console.log("updateConveniosAction state", state);
-      console.log("updateConveniosAction payload", payload);
+      // console.log("updateConveniosAction payload", payload);
 
       let data = new FormData();
       data.append("name_company_convenio", payload.datos.name);
