@@ -50,17 +50,16 @@
         <label for="documentoConvenio" size="sm">Archivo:</label>
       </b-col>
       <b-col sm="10">
-        <a
-          v-if="
-            this.infoModal.title != 'Añadir Convenio' &&
-            this.infoModal.content.document
-          "
-          :href="storageUrl(this.infoModal.content.document)"
-          target="_blank"
-        >
-          <b-icon icon="file-earmark-text-fill"></b-icon>
-        </a>
-        <p v-else>Sin documento</p>
+        <div v-if="this.infoModal.title != 'Añadir Convenio'">
+          <a
+            v-if="this.infoModal.content.document"
+            :href="storageUrl(this.infoModal.content.document)"
+            target="_blank"
+          >
+            <b-icon icon="file-earmark-text-fill"></b-icon>
+          </a>
+          <p v-else>Sin documento</p>
+        </div>
         <b-form-file
           accept=".jpg, .jpeg, .png, .pdf"
           v-model="datos.archivo"
@@ -134,10 +133,15 @@ export default {
           this.limpieza();
         }, 1000);
       } else {
-        // Code to Edit
-        // console.log("this.infoModal.content", this.infoModal.content);
-        // console.log("datos en edit", this.datos);
-        this.updateConvenios(this.datos);
+        const idEdit = this.infoModal.title.split("#");
+        // console.log("id edit", idEdit[1]);
+        this.updateConvenios({
+          datos: { ...this.datos },
+          idEdit: idEdit[1],
+        });
+        setTimeout(() => {
+          this.limpieza();
+        }, 1000);
       }
     },
     storageUrl(data) {

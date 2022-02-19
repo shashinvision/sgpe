@@ -101,12 +101,19 @@ class ConvenioController extends Controller
      * @param  \App\Models\Convenio  $convenio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Convenio $convenio)
+    public function update(Request $request, Convenio $convenio, $id)
     {
+        $data = $request->all(['document_path', 'date_start', 'date_end', 'name_company_convenio']);
 
-        $task = Convenio::findOrFail($id);
-        $task->update($request->all(['document_path', 'date_start', 'date_end', 'companys_id']));
-        return $task;
+        if ($request->hasFile('document_path')) {
+            $data['document_path'] = $request->file('document_path')->store('public');
+        }
+
+        $respuesta = $convenio::findOrFail($id);
+
+        // $respuesta->update($request->all(['document_path', 'date_start', 'date_end', 'companys_id']));
+        $respuesta->update($data);
+        return json_encode("Convenio editado con éxito.");
     }
 
     /**

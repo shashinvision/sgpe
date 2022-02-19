@@ -88,9 +88,7 @@ const convenios = {
       data.append("states_id", 2);
       data.append(
         "document_path",
-        payload.archivo != null && payload.archivo != undefined
-          ? payload.archivo
-          : payload.document
+        payload.archivo != null ? payload.archivo : payload.document
       );
       data.append("date_start", payload.dateStart);
       data.append("date_end", payload.dateEnd);
@@ -120,44 +118,61 @@ const convenios = {
         });
     },
     async updateConveniosAction({ commit, state }, payload) {
-      // console.log("updateConveniosAction commit, state", commit, state);
-      // console.log("updateConveniosAction payload", payload);
-      // console.log(
-      //   "store de access en store convenios ",
-      //   store._modules.root.state.access.user_data
-      // );
+      // const data = {
+      //   name_company_convenio: payload.name,
+      //   created_by_user_id: store._modules.root.state.access.user_data.id,
+      //   companys_id: store._modules.root.state.access.user_data.id_companys,
+      //   states_id: 2,
+      //   document_path: payload.archivo.name,
+      //   date_start: payload.dateStart,
+      //   date_end: payload.dateEnd,
+      //   state: 1,
+      // };
 
-      // console.log("token", store._modules.root.state.access.access_token);
-      // console.log("document", payload.archivo);
-      const data = {
-        name_company_convenio: payload.name,
-        created_by_user_id: store._modules.root.state.access.user_data.id,
-        companys_id: store._modules.root.state.access.user_data.id_companys,
-        states_id: 2,
-        document_path: payload.archivo.name,
-        date_start: payload.dateStart,
-        date_end: payload.dateEnd,
-        state: 1,
-      };
+      // console.log("updateConveniosAction commit", commit);
+      // console.log("updateConveniosAction state", state);
+      console.log("updateConveniosAction payload", payload);
 
-      // console.log("Data insert", data);
+      let data = new FormData();
+      data.append("name_company_convenio", payload.datos.name);
+      data.append(
+        "created_by_user_id",
+        store._modules.root.state.access.user_data.id
+      );
+      data.append(
+        "companys_id",
+        store._modules.root.state.access.user_data.id_companys
+      );
+      data.append("states_id", 2);
+      data.append(
+        "document_path",
+        payload.datos.archivo != null
+          ? payload.datos.archivo
+          : payload.datos.document
+      );
+      data.append("date_start", payload.datos.dateStart);
+      data.append("date_end", payload.datos.dateEnd);
+      data.append("state", 1);
 
-      await fetch(state.API.baseURL + "/api/auth/convenio/edit/" + payload.id, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer " + store._modules.root.state.access.access_token,
-          "X-Requested-With": "XMLHttpRequest",
-        },
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-        // body: data, // body data type must match "Content-Type" header
-      })
+      await fetch(
+        state.API.baseURL + "/api/auth/convenio/edit/" + payload.idEdit,
+        {
+          method: "POST",
+          headers: {
+            // "Content-Type": "application/json",
+            Authorization:
+              "Bearer " + store._modules.root.state.access.access_token,
+            "X-Requested-With": "XMLHttpRequest",
+          },
+          // body: JSON.stringify(data), // body data type must match "Content-Type" header
+          body: data, // Cuando se usa FormData JSON.stringify, no se necesita body data type must match "Content-Type" header
+        }
+      )
         .then((res) => {
           return res.json();
         })
         .then((payload) => {
-          console.log("Respuesta insert", payload);
+          // console.log("Respuesta insert", payload);
 
           commit("setConveniosMutation", payload);
         })
