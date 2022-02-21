@@ -73,10 +73,10 @@ const convenios = {
             let difference = Math.abs(todayDate - dateEndConvenio);
             let days = difference / (1000 * 3600 * 24);
 
-            console.log(
-              "Diferencia de dias convenio: " + dataConvenios[i].id,
-              days
-            );
+            // console.log(
+            //   "Diferencia de dias convenio: " + dataConvenios[i].id,
+            //   days
+            // );
 
             if (dataConvenios[i].state == "Activo") {
               if (dateEndConvenio >= todayDate) {
