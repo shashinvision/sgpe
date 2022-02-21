@@ -17,7 +17,7 @@ class ConvenioController extends Controller
     {
         /*
         * Si el $idCompanys es mayor a 1 se verán los datos por el id de la compañía.
-        * Si el $idCompanys es igual a 1 se verán todos los datos independiente de la compañía.
+        * Si el $idCompanys es igual a 1 se verán todos los datos independiente de la compañía, ya que corresponde al id del administrador total.
         */
 
         $convenios = null;
