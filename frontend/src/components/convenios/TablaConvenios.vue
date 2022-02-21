@@ -159,6 +159,10 @@
                 {{ row.item.passedBy || "Sin información" }}
               </li>
               <li>
+                <b>Desaprobado por: </b>
+                {{ row.item.disapprovedBy || "Sin información" }}
+              </li>
+              <li>
                 <b>Estado Convenio : </b>
                 {{ row.item.isActive ? "Vigente" : "Vencido" }}
               </li>

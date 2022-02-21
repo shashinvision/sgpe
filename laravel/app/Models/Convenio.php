@@ -13,6 +13,7 @@ class Convenio extends Model
         'name_company_convenio',
         'created_by_user_id',
         'approved_by_user_id',
+        'disapproved_by_user_id',
         'companys_id',
         'states_id',
         'document_path',

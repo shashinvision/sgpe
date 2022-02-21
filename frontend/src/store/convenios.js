@@ -212,6 +212,8 @@ const convenios = {
     async activarDesactivarConveniosAction({ commit, state }, payload) {
       const data = {
         states_id: payload.states_id,
+        approved_by_user_id: payload.approved_by_user_id,
+        disapproved_by_user_id: payload.disapproved_by_user_id,
       };
       await fetch(
         state.API.baseURL + "/api/auth/convenio/estado/" + payload.id,

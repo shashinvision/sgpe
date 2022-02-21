@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "SgpeInfomodal",
@@ -52,6 +52,9 @@ export default {
       },
     },
   },
+  computed: {
+    ...mapState("access", ["user_data"]),
+  },
   mounted() {},
 
   methods: {
@@ -60,6 +63,9 @@ export default {
       activarDesactivarConvenio: "activarDesactivarConveniosAction",
     }),
     activaDesactiva(estado) {
+      let approved_by_user_id = estado == 1 ? this.user_data.id : "";
+      let disapproved_by_user_id = estado == 2 ? this.user_data.id : "";
+
       if (
         confirm(
           `¡Alerta!, ¿Estas seguro de querer ${
@@ -70,6 +76,8 @@ export default {
         this.activarDesactivarConvenio({
           id: this.infoModal.content.id,
           states_id: estado,
+          approved_by_user_id,
+          disapproved_by_user_id,
         });
         setTimeout(() => {
           this.$emit("datosTabla", "");

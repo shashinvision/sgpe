@@ -23,9 +23,10 @@ class ConvenioController extends Controller
         $convenios = null;
         if ($idCompanys > 1) {
             $convenios = DB::table('convenios as c')
-                ->select('c.id as id', 'c.name_company_convenio as name', 'uc.name as addBy', 'ua.name as passedBy', 'cp.name as company', 's.name as state', 'c.document_path as document', 'c.date_start as dateStart', 'c.date_end as dateEnd')
+                ->select('c.id as id', 'c.name_company_convenio as name', 'uc.name as addBy', 'ua.name as passedBy', 'ud.disapproved_by_user_id as disapprovedBy', 'cp.name as company', 's.name as state', 'c.document_path as document', 'c.date_start as dateStart', 'c.date_end as dateEnd')
                 ->join("users as uc", 'uc.id', "=", "c.created_by_user_id")
                 ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
+                ->leftJoin("users as ud", 'ud.id', "=", "c.disapproved_by_user_id")
                 ->join('companys as cp', 'cp.id', "=", "c.companys_id")
                 ->join('states as s', 's.id', "=", "c.states_id")
                 ->where('c.id_companys', $idCompanys)
@@ -34,9 +35,10 @@ class ConvenioController extends Controller
                 ->get();
         } else {
             $convenios = DB::table('convenios as c')
-                ->select('c.id as id', 'c.name_company_convenio as name', 'uc.name as addBy', 'ua.name as passedBy', 'cp.name as company', 's.name as state', 'c.document_path as document', 'c.date_start as dateStart', 'c.date_end as dateEnd')
+                ->select('c.id as id', 'c.name_company_convenio as name', 'uc.name as addBy', 'ua.name as passedBy', 'ud.name as disapprovedBy', 'cp.name as company', 's.name as state', 'c.document_path as document', 'c.date_start as dateStart', 'c.date_end as dateEnd')
                 ->join("users as uc", 'uc.id', "=", "c.created_by_user_id")
                 ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
+                ->leftJoin("users as ud", 'ud.id', "=", "c.disapproved_by_user_id")
                 ->join('companys as cp', 'cp.id', "=", "c.companys_id")
                 ->join('states as s', 's.id', "=", "c.states_id")
                 ->where('c.state', "=", "1")
@@ -126,7 +128,7 @@ class ConvenioController extends Controller
      */
     public function activaDesactiva(Convenio $convenio, Request $request, $id)
     {
-        $data = $request->all(['states_id']);
+        $data = $request->all(['states_id', 'approved_by_user_id', 'disapproved_by_user_id']);
         $respuesta = $convenio::findOrFail($id);
         $respuesta->update($data);
         return json_encode("Convenio actualizado con éxito.");
