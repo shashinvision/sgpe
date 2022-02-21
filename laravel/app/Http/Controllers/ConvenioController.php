@@ -23,10 +23,11 @@ class ConvenioController extends Controller
         $convenios = null;
 
         $convenios = DB::table('convenios as c')
-            ->select('c.id as id', 'c.name_company_convenio as name', 'uc.name as addBy', 'ua.name as passedBy', 'ud.name as disapprovedBy', 'cp.name as company', 's.name as state', 'c.document_path as document', 'c.date_start as dateStart', 'c.date_end as dateEnd')
+            ->select('c.id as id', 'c.name_company_convenio as name', 'uc.name as addBy', 'ua.name as passedBy', 'ud.name as disapprovedBy', 'ue.name as editedBy', 'cp.name as company', 's.name as state', 'c.document_path as document', 'c.date_start as dateStart', 'c.date_end as dateEnd')
             ->join("users as uc", 'uc.id', "=", "c.created_by_user_id")
             ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
             ->leftJoin("users as ud", 'ud.id', "=", "c.disapproved_by_user_id")
+            ->leftJoin("users as ue", 'ue.id', "=", "c.edit_by_user_id")
             ->join('companys as cp', 'cp.id', "=", "c.companys_id")
             ->join('states as s', 's.id', "=", "c.states_id")
             ->where('c.state', "=", "1")
@@ -97,7 +98,7 @@ class ConvenioController extends Controller
      */
     public function update(Request $request, Convenio $convenio, $id)
     {
-        $data = $request->all(['document_path', 'date_start', 'date_end', 'name_company_convenio']);
+        $data = $request->all(['document_path', 'date_start', 'date_end', 'name_company_convenio', 'edit_by_user_id']);
 
         if ($request->hasFile('document_path')) {
             $data['document_path'] = $request->file('document_path')->store('public');

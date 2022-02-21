@@ -37,5 +37,10 @@ class PermissionSeeder extends Seeder
             'state' => 1,
 
         ]);
+        DB::table('permissions')->insert([
+            'name' => 'editor',
+            'state' => 1,
+
+        ]);
     }
 }

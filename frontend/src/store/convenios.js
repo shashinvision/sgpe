@@ -184,7 +184,7 @@ const convenios = {
       let data = new FormData();
       data.append("name_company_convenio", payload.datos.name);
       data.append(
-        "created_by_user_id",
+        "edit_by_user_id",
         store._modules.root.state.access.user_data.id
       );
       data.append(

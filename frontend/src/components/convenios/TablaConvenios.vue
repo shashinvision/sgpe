@@ -130,7 +130,11 @@
           size="sm"
           @click="info(row.item, row.index, $event.target)"
           class="mr-1"
-          v-if="user_data.id_permissions < 4"
+          v-if="
+            user_data.id_permissions == 1 ||
+            user_data.id_permissions == 3 ||
+            user_data.id_permissions == 5
+          "
         >
           <b-icon icon="wrench" aria-hidden="true"></b-icon>
         </b-button>
@@ -161,6 +165,10 @@
               <li>
                 <b>Ingresado por: </b>
                 {{ row.item.addBy || "Sin información" }}
+              </li>
+              <li>
+                <b>Editado por: </b>
+                {{ row.item.editedBy || "Sin información" }}
               </li>
               <li>
                 <b>Aprobado por: </b>

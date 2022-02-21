@@ -14,6 +14,7 @@ class Convenio extends Model
         'created_by_user_id',
         'approved_by_user_id',
         'disapproved_by_user_id',
+        'edit_by_user_id',
         'companys_id',
         'states_id',
         'document_path',

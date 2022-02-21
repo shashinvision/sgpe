@@ -33,7 +33,7 @@
         @click="addEdit"
         id="edit"
         class="btn btn-info"
-        v-if="user_data.id_permissions === 1 || user_data.id_permissions === 2"
+        v-if="user_data.id_permissions === 1 || user_data.id_permissions === 5"
       >
         <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
       </button>
@@ -41,7 +41,7 @@
       <b-button
         @click="deleteItem"
         class="btn btn-danger"
-        v-if="user_data.id_permissions === 1 || user_data.id_permissions === 2"
+        v-if="user_data.id_permissions === 1 || user_data.id_permissions === 5"
       >
         <b-icon icon="trash-fill" aria-hidden="true"></b-icon
       ></b-button>
