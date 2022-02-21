@@ -172,7 +172,7 @@
               </li>
               <li>
                 <b>Estado Convenio : </b>
-                {{ row.item.isActive ? "Vigente" : "Vencido" }}
+                {{ row.item.isActive ? "Activo" : "No activo" }}
               </li>
               <li>
                 <b>Documento : </b>
@@ -261,7 +261,7 @@ export default {
           key: "isActive",
           label: "Estado Convenio",
           formatter: (value) => {
-            return value ? "Vigente" : "No vigente";
+            return value ? "Activo" : "No activo";
           },
           sortable: true,
           sortByFormatted: true,

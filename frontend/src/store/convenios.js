@@ -49,11 +49,54 @@ const convenios = {
           // console.log("dataConvenios payload", dataConvenios);
 
           for (let i = 0; i < dataConvenios.length; i++) {
-            // console.log("dataconvenios", dataConvenios[i]);
-            if (dataConvenios[i].state == "Vigente") {
-              dataConvenios[i].isActive = true;
-              dataConvenios[i]._rowVariant = "success";
-            } else if (dataConvenios[i].state == "No vigente") {
+            // console.log(
+            //   "dataconvenio: " + dataConvenios[i].id,
+            //   dataConvenios[i]
+            // );
+
+            let dateEndConvenio = new Date(dataConvenios[i].dateEnd);
+            // el setMinutes es debido a que para compensar la zona horaria que ocurre con el forma "año-mes-dia, puede que reste un dia si no tiene los minutos, de esta forma da los dias correctos "
+            dateEndConvenio.setMinutes(
+              dateEndConvenio.getMinutes() + dateEndConvenio.getTimezoneOffset()
+            );
+            let todayDate = new Date(); // la fecha actual
+            todayDate.setMinutes(
+              todayDate.getMinutes() + todayDate.getTimezoneOffset()
+            );
+
+            // console.log(
+            //   "dia inicio convenio: " + dataConvenios[i].id,
+            //   dateStart
+            // );
+            // console.log("dia fin convenio: " + dataConvenios[i].id, dateEnd);
+
+            let difference = Math.abs(todayDate - dateEndConvenio);
+            let days = difference / (1000 * 3600 * 24);
+
+            console.log(
+              "Diferencia de dias convenio: " + dataConvenios[i].id,
+              days
+            );
+
+            if (dataConvenios[i].state == "Activo") {
+              if (dateEndConvenio >= todayDate) {
+                if (days > 5) {
+                  dataConvenios[i].isActive = true;
+                  dataConvenios[i]._rowVariant = "success";
+                } else {
+                  dataConvenios[i].isActive = true;
+                  dataConvenios[i]._rowVariant = "warning";
+                }
+              } else {
+                if (days < 1) {
+                  dataConvenios[i].isActive = true;
+                  dataConvenios[i]._rowVariant = "warning";
+                } else if (days > 1) {
+                  dataConvenios[i].isActive = true;
+                  dataConvenios[i]._rowVariant = "danger";
+                }
+              }
+            } else if (dataConvenios[i].state == "No activo") {
               dataConvenios[i].isActive = false;
               dataConvenios[i]._rowVariant = "danger";
             }
