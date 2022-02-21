@@ -10,7 +10,10 @@
         @click="activaDesactiva(1)"
         id="activar"
         class="btn btn-success"
-        v-if="!infoModal.content.isActive"
+        v-if="
+          !infoModal.content.isActive &&
+          (user_data.id_permissions === 1 || user_data.id_permissions === 3)
+        "
       >
         Activar
       </button>
@@ -18,16 +21,28 @@
         @click="activaDesactiva(2)"
         id="desactivar"
         class="btn btn-warning"
-        v-else
+        v-else-if="
+          infoModal.content.isActive &&
+          (user_data.id_permissions === 1 || user_data.id_permissions === 3)
+        "
       >
         Desactivar
       </button>
 
-      <button @click="addEdit" id="edit" class="btn btn-info">
+      <button
+        @click="addEdit"
+        id="edit"
+        class="btn btn-info"
+        v-if="user_data.id_permissions === 1 || user_data.id_permissions === 2"
+      >
         <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
       </button>
 
-      <b-button @click="deleteItem" class="btn btn-danger">
+      <b-button
+        @click="deleteItem"
+        class="btn btn-danger"
+        v-if="user_data.id_permissions === 1 || user_data.id_permissions === 2"
+      >
         <b-icon icon="trash-fill" aria-hidden="true"></b-icon
       ></b-button>
     </div>

@@ -25,10 +25,7 @@ const convenios = {
   },
   actions: {
     async getConveniosAction({ commit, state }) {
-      console.log(
-        "State Access ",
-        store._modules.root.state.access.user_data.id_companys
-      );
+      // console.log("State Access ", store._modules.root.state.access.user_data);
 
       await fetch(
         state.API.baseURL +

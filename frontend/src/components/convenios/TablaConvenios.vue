@@ -90,7 +90,14 @@
         </b-form-group>
       </b-col>
       <b-col lg="6" class="my-1 d-flex flex-row-reverse">
-        <b-button variant="info" class="w-sm-100" id="add" @click="addEdit"
+        <b-button
+          variant="info"
+          class="w-sm-100"
+          id="add"
+          @click="addEdit"
+          v-if="
+            user_data.id_permissions === 1 || user_data.id_permissions === 2
+          "
           >Añadir convenio</b-button
         >
       </b-col>
@@ -123,6 +130,7 @@
           size="sm"
           @click="info(row.item, row.index, $event.target)"
           class="mr-1"
+          v-if="user_data.id_permissions < 4"
         >
           <b-icon icon="wrench" aria-hidden="true"></b-icon>
         </b-button>
@@ -284,6 +292,7 @@ export default {
   },
 
   computed: {
+    ...mapState("access", ["user_data"]),
     ...mapState("convenios", ["convenios"]),
     sortOptions() {
       // Create an options list from our fields
