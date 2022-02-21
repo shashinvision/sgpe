@@ -55,6 +55,10 @@ Route::group([
             '/convenio/delete/{id}',
             [ConvenioController::class, 'destroy']
         );
+        Route::post(
+            '/convenio/estado/{id}',
+            [ConvenioController::class, 'activaDesactiva']
+        );
         // Route::get(
         //     '/task/{id?}',
         //     'TaskController@index'

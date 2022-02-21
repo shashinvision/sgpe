@@ -6,17 +6,22 @@
     @hide="resetInfoModal"
   >
     <div class="d-flex justify-content-between">
-      <router-link
-        :to="{ name: 'editar', params: { id: infoModal.id } }"
+      <button
+        @click="activaDesactiva(1)"
+        id="activar"
         class="btn btn-success"
-        >Activar</router-link
+        v-if="!infoModal.content.isActive"
       >
-      <router-link
-        :to="{ name: 'editar', params: { id: infoModal.id } }"
-        class="btn"
-        style="background-color: #f5c6cb"
-        >Desactivar</router-link
+        Activar
+      </button>
+      <button
+        @click="activaDesactiva(2)"
+        id="desactivar"
+        class="btn btn-warning"
+        v-else
       >
+        Desactivar
+      </button>
       <br />
       <button @click="addEdit" id="edit" class="btn btn-info">
         <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
@@ -52,7 +57,27 @@ export default {
   methods: {
     ...mapActions("convenios", {
       deleteConvenios: "deleteConveniosAction",
+      activarDesactivarConvenio: "activarDesactivarConveniosAction",
     }),
+    activaDesactiva(estado) {
+      if (
+        confirm(
+          `¡Alerta!, ¿Estas seguro de querer ${
+            estado == 1 ? "activar " : "desactivar"
+          } el convenio ?.`
+        )
+      ) {
+        this.activarDesactivarConvenio({
+          id: this.infoModal.content.id,
+          states_id: estado,
+        });
+        setTimeout(() => {
+          this.$emit("datosTabla", "");
+
+          this.$root.$emit("bv::hide::modal", "info-modal");
+        }, 500);
+      }
+    },
     deleteItem() {
       if (
         confirm(

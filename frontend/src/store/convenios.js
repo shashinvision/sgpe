@@ -209,6 +209,35 @@ const convenios = {
           console.error("Error al intentar ingresar", err);
         });
     },
+    async activarDesactivarConveniosAction({ commit, state }, payload) {
+      const data = {
+        states_id: payload.states_id,
+      };
+      await fetch(
+        state.API.baseURL + "/api/auth/convenio/estado/" + payload.id,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer " + store._modules.root.state.access.access_token,
+            "X-Requested-With": "XMLHttpRequest",
+          },
+          body: JSON.stringify(data), // body data type must match "Content-Type" header
+        }
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then((payload) => {
+          // console.log("Respuesta insert", payload);
+
+          commit("setConveniosMutation", payload);
+        })
+        .catch((err) => {
+          console.error("Error al intentar ingresar", err);
+        });
+    },
     cleanMessageAction({ commit }) {
       commit("cleanMessageMutation");
     },
