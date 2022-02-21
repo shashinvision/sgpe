@@ -21,30 +21,20 @@ class ConvenioController extends Controller
         */
 
         $convenios = null;
-        if ($idCompanys > 1) {
-            $convenios = DB::table('convenios as c')
-                ->select('c.id as id', 'c.name_company_convenio as name', 'uc.name as addBy', 'ua.name as passedBy', 'ud.disapproved_by_user_id as disapprovedBy', 'cp.name as company', 's.name as state', 'c.document_path as document', 'c.date_start as dateStart', 'c.date_end as dateEnd')
-                ->join("users as uc", 'uc.id', "=", "c.created_by_user_id")
-                ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
-                ->leftJoin("users as ud", 'ud.id', "=", "c.disapproved_by_user_id")
-                ->join('companys as cp', 'cp.id', "=", "c.companys_id")
-                ->join('states as s', 's.id', "=", "c.states_id")
-                ->where('c.id_companys', $idCompanys)
-                ->where('c.state', "=", "1")
-                ->order('c.id', 'asc')
-                ->get();
-        } else {
-            $convenios = DB::table('convenios as c')
-                ->select('c.id as id', 'c.name_company_convenio as name', 'uc.name as addBy', 'ua.name as passedBy', 'ud.name as disapprovedBy', 'cp.name as company', 's.name as state', 'c.document_path as document', 'c.date_start as dateStart', 'c.date_end as dateEnd')
-                ->join("users as uc", 'uc.id', "=", "c.created_by_user_id")
-                ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
-                ->leftJoin("users as ud", 'ud.id', "=", "c.disapproved_by_user_id")
-                ->join('companys as cp', 'cp.id', "=", "c.companys_id")
-                ->join('states as s', 's.id', "=", "c.states_id")
-                ->where('c.state', "=", "1")
-                ->orderBy('c.id', 'asc')
-                ->get();
-        }
+
+        $convenios = DB::table('convenios as c')
+            ->select('c.id as id', 'c.name_company_convenio as name', 'uc.name as addBy', 'ua.name as passedBy', 'ud.name as disapprovedBy', 'cp.name as company', 's.name as state', 'c.document_path as document', 'c.date_start as dateStart', 'c.date_end as dateEnd')
+            ->join("users as uc", 'uc.id', "=", "c.created_by_user_id")
+            ->leftJoin("users as ua", 'ua.id', "=", "c.approved_by_user_id")
+            ->leftJoin("users as ud", 'ud.id', "=", "c.disapproved_by_user_id")
+            ->join('companys as cp', 'cp.id', "=", "c.companys_id")
+            ->join('states as s', 's.id', "=", "c.states_id")
+            ->where('c.state', "=", "1")
+            ->when($idCompanys > 1, function ($q) use ($idCompanys) {
+                return $q->where('c.companys_id', "=", $idCompanys);
+            })
+            ->orderBy('c.id', 'asc')
+            ->get();
 
         return json_encode($convenios);
     }

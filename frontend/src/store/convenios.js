@@ -25,17 +25,25 @@ const convenios = {
   },
   actions: {
     async getConveniosAction({ commit, state }) {
-      // console.log("Data insert", data);
+      console.log(
+        "State Access ",
+        store._modules.root.state.access.user_data.id_companys
+      );
 
-      await fetch(state.API.baseURL + "/api/auth/convenios", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer " + store._modules.root.state.access.access_token,
-          "X-Requested-With": "XMLHttpRequest",
-        },
-      })
+      await fetch(
+        state.API.baseURL +
+          "/api/auth/convenios/" +
+          store._modules.root.state.access.user_data.id_companys,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer " + store._modules.root.state.access.access_token,
+            "X-Requested-With": "XMLHttpRequest",
+          },
+        }
+      )
         .then((res) => {
           return res.json();
         })

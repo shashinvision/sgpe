@@ -40,7 +40,7 @@ Route::group([
             'AuthController@user'
         );
         Route::get(
-            '/convenios',
+            '/convenios/{idCompanys}',
             [ConvenioController::class, 'index']
         );
         Route::post(
