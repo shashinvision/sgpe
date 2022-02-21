@@ -340,7 +340,7 @@ export default {
         this.infoModal.title = "Añadir Convenio";
       } else {
         this.infoModal.title = "Convenio #" + this.infoModal.content.id;
-        console.log("DataSet", this.infoModal.content);
+        // console.log("DataSet", this.infoModal.content);
       }
       this.$root.$emit("bv::show::modal", "addEditConvenioModal");
     },
