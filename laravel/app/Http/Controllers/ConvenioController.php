@@ -119,6 +119,19 @@ class ConvenioController extends Controller
     }
 
     /**
+     * Activa o desactiva  un convenio especifico.
+     *
+     * @param  \App\Models\Convenio  $convenio
+     * @return \Illuminate\Http\Response
+     */
+    public function activaDesactiva(Convenio $convenio, Request $request, $id)
+    {
+        $data = $request->all(['states_id']);
+        $respuesta = $convenio::findOrFail($id);
+        $respuesta->update($data);
+        return json_encode("Convenio actualizado con éxito.");
+    }
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Convenio  $convenio

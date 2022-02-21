@@ -213,43 +213,22 @@
     <!-- añadir modal -->
     <AddModal :infoModal="infoModal" @refrescar="datosTabla" />
     <!-- Info modal -->
-    <b-modal
-      :id="infoModal.id"
-      :title="infoModal.title"
-      hide-footer
-      @hide="resetInfoModal"
-    >
-      <div class="d-flex justify-content-between">
-        <router-link
-          :to="{ name: 'editar', params: { id: infoModal.id } }"
-          class="btn btn-success"
-          >Activar</router-link
-        >
-        <router-link
-          :to="{ name: 'editar', params: { id: infoModal.id } }"
-          class="btn"
-          style="background-color: #f5c6cb"
-          >Desactivar</router-link
-        >
-        <br />
-        <button @click="addEdit" id="edit" class="btn btn-info">
-          <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
-        </button>
-
-        <b-button @click="deleteItem" class="btn btn-danger">
-          <b-icon icon="trash-fill" aria-hidden="true"></b-icon
-        ></b-button>
-      </div>
-    </b-modal>
+    <InfoModal
+      :infoModal="infoModal"
+      @datosTabla="datosTabla"
+      @resetInfoModal="resetInfoModal"
+      @addEdit="addEdit"
+    />
   </b-container>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
 import AddModal from "./AddModal.vue";
+import InfoModal from "./InfoModal.vue";
 
 export default {
-  components: { AddModal },
+  components: { AddModal, InfoModal },
   data() {
     return {
       items: [],
@@ -328,7 +307,6 @@ export default {
   methods: {
     ...mapActions("convenios", {
       getConvenios: "getConveniosAction",
-      deleteConvenios: "deleteConveniosAction",
     }),
     info(item, index, button) {
       this.infoModal.title = `Convenio #${item.id}`;
@@ -345,28 +323,7 @@ export default {
       }
       this.$root.$emit("bv::show::modal", "addEditConvenioModal");
     },
-    deleteItem() {
-      if (
-        confirm(
-          "¡Alerta!, ¿Estas seguro de querer eliminar este registro?.\n\rEl registro no se visualizará en la tabla después de esta acción, pero sus datos se conservará en la base de datos de forma interna."
-        )
-      ) {
-        this.deleteConvenios({ id: this.infoModal.content.id });
-        setTimeout(() => {
-          this.datosTabla();
-          this.$root.$emit("bv::hide::modal", "info-modal");
-        }, 500);
-      }
-    },
-    resetInfoModal() {
-      this.infoModal.title = "";
-      this.infoModal.content = {
-        name: "",
-        dateStart: "",
-        dateEnd: "",
-        document: "",
-      };
-    },
+
     onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
@@ -383,6 +340,15 @@ export default {
         // Set the initial number of items
         this.totalRows = this.items.length;
       }, 500);
+    },
+    resetInfoModal() {
+      this.infoModal.title = "";
+      this.infoModal.content = {
+        name: "",
+        dateStart: "",
+        dateEnd: "",
+        document: "",
+      };
     },
   },
 };
