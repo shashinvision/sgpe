@@ -20,4 +20,10 @@ class Convenio extends Model
         'date_end',
         'state',
     ];
+
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
