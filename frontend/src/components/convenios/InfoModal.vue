@@ -22,7 +22,7 @@
       >
         Desactivar
       </button>
-      <br />
+
       <button @click="addEdit" id="edit" class="btn btn-info">
         <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
       </button>
