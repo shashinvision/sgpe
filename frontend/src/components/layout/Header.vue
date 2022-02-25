@@ -40,7 +40,9 @@
             <b id="colorMenu">Menú</b>
           </template>
           <b-dropdown-item href="#">Perfil</b-dropdown-item>
-          <b-dropdown-item href="#">Administración</b-dropdown-item>
+          <b-dropdown-item v-if="user_data.id_permissions === 1"
+            >Administración</b-dropdown-item
+          >
           <b-dropdown-item v-if="auth" @click="logoutNow"
             >Cerrar sesión</b-dropdown-item
           >
@@ -60,7 +62,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapState("access", ["auth"]),
+    ...mapState("access", ["auth", "user_data"]),
   },
   mounted() {},
   methods: {
