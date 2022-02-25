@@ -149,6 +149,7 @@
 
         <!-- Main table element -->
         <b-table
+          responsive
           :items="items"
           :fields="fields"
           :current-page="currentPage"
@@ -264,13 +265,13 @@ export default {
       fields: [
         {
           key: "name",
-          label: "Nombre de usuario",
+          label: "Nombre",
           sortable: true,
           sortDirection: "desc",
         },
         {
           key: "mail",
-          label: "Correo de usuario",
+          label: "Correo",
           sortable: true,
           class: "text-center",
         },
@@ -322,10 +323,7 @@ export default {
       this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
     },
-    resetInfoModal() {
-      this.infoModal.title = "";
-      this.infoModal.content = "";
-    },
+
     onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;

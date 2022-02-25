@@ -75,7 +75,7 @@ body {
 
 .form-signin {
   width: 100%;
-  max-width: 70%;
+  max-width: 100%;
   padding: 15px;
   margin: auto;
 }

@@ -28,7 +28,12 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    resetInfoModal() {
+      this.infoModal.title = "";
+      this.infoModal.content = "";
+    },
+  },
 };
 </script>
 
