@@ -175,9 +175,9 @@
             >
               Info modal
             </b-button>
-            <b-button size="sm" @click="row.toggleDetails">
+            <!-- <b-button size="sm" @click="row.toggleDetails">
               {{ row.detailsShowing ? "Hide" : "Show" }} Details
-            </b-button>
+            </b-button> -->
           </template>
 
           <template #row-details="row">
@@ -225,14 +225,7 @@
         </b-row>
 
         <!-- Info modal -->
-        <b-modal
-          :id="infoModal.id"
-          :title="infoModal.title"
-          ok-only
-          @hide="resetInfoModal"
-        >
-          <pre>{{ infoModal.content }}</pre>
-        </b-modal>
+        <InfoModal :infoModal="infoModal" />
       </b-container>
       <!-- Fin Tabla mantenedor  -->
     </b-card-body>
@@ -240,9 +233,10 @@
 </template>
 
 <script>
+import InfoModal from "./InfoModal.vue";
 export default {
   name: "SgpeEmpresas",
-
+  components: { InfoModal },
   data() {
     return {
       items: [
