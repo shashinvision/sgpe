@@ -2,13 +2,13 @@
   <b-modal
     :id="infoModal.id"
     :title="infoModal.title"
-    ok-only
+    hide-footer
     @hide="resetInfoModal"
   >
     <!-- <pre>{{ infoModal.content }}</pre> -->
     <b-button variant="info" @click="verForm"> editar </b-button>
     <b-button variant="danger"> eliminar </b-button>
-    <FormAddEditCompany v-if="!formActivo" />
+    <FormAddEditCompany v-if="formActivo" />
   </b-modal>
 </template>
 
@@ -22,7 +22,6 @@ export default {
       formActivo: false,
     };
   },
-
   props: {
     infoModal: {
       type: Object,
@@ -31,9 +30,6 @@ export default {
       },
     },
   },
-
-  mounted() {},
-
   methods: {
     resetInfoModal() {
       this.infoModal.title = "";

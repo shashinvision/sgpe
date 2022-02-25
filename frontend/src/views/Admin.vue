@@ -25,7 +25,7 @@
           </b-card-header>
 
           <b-card-body>
-            <Empresas v-if="navActive" />
+            <Companys v-if="navActive" />
             <Usuarios v-else />
           </b-card-body>
         </b-card>
@@ -35,11 +35,11 @@
 </template>
 
 <script>
-import Empresas from "../components/admin/Empresas.vue";
+import Companys from "../components/admin/Companys.vue";
 import Usuarios from "../components/admin/Usuarios.vue";
 export default {
   components: {
-    Empresas,
+    Companys,
     Usuarios,
   },
   name: "SgpeAdmin",

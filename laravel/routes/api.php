@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConvenioController;
+use App\Http\Controllers\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,10 @@ Route::group([
         Route::get(
             '/convenios/{idCompanys}',
             [ConvenioController::class, 'index']
+        );
+        Route::get(
+            '/companys',
+            [CompanyController::class, 'index']
         );
         Route::post(
             '/convenio',

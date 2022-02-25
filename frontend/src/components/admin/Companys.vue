@@ -231,7 +231,7 @@
         </b-row>
 
         <!-- Info modal -->
-        <InfoModal :infoModal="infoModal" />
+        <InfoModalCompanys :infoModal="infoModal" />
       </b-container>
       <!-- Fin Tabla mantenedor  -->
     </b-card-body>
@@ -241,47 +241,27 @@
 </template>
 
 <script>
-import InfoModal from "./InfoModal.vue";
+import InfoModalCompanys from "./InfoModalCompanys.vue";
 import AddModalCompany from "./AddModalCompany.vue";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "SgpeEmpresas",
-  components: { InfoModal, AddModalCompany },
+  components: { InfoModalCompanys, AddModalCompany },
   data() {
     return {
-      items: [
-        {
-          mail: "1lore10@lorem.cl",
-          name: "1Dickerson Macdonald",
-        },
-        {
-          mail: "2lore10@lorem.cl",
-          name: "2Dickerson Macdonald",
-        },
-        {
-          mail: "3lore10@lorem.cl",
-          name: "3Dickerson Macdonald",
-        },
-        {
-          mail: "4lore10@lorem.cl",
-          name: "4Dickerson Macdonald",
-        },
-        {
-          mail: "5lore10@lorem.cl",
-          name: "5Dickerson Macdonald",
-        },
-      ],
+      items: [],
       fields: [
+        {
+          key: "id",
+          label: "ID",
+          sortable: true,
+          class: "text-center",
+        },
         {
           key: "name",
           label: "Nombre",
           sortable: true,
           sortDirection: "desc",
-        },
-        {
-          key: "mail",
-          label: "Correo",
-          sortable: true,
-          class: "text-center",
         },
         // {
         //   key: "isActive",
@@ -308,10 +288,12 @@ export default {
         id: "info-modal",
         title: "",
         content: "",
+        default: false,
       },
     };
   },
   computed: {
+    ...mapState("companys", ["companys"]),
     sortOptions() {
       // Create an options list from our fields
       return this.fields
@@ -323,9 +305,20 @@ export default {
   },
   mounted() {
     // Set the initial number of items
-    this.totalRows = this.items.length;
+    this.datosTabla();
   },
   methods: {
+    ...mapActions("companys", {
+      getCompanys: "getCompanysAction",
+    }),
+    datosTabla() {
+      this.getCompanys();
+      setTimeout(() => {
+        this.items = this.companys;
+        // Set the initial number of items
+        this.totalRows = this.items.length;
+      }, 500);
+    },
     addEdit() {
       this.infoModal.title = `Añadir compñia`;
       this.$root.$emit("bv::show::modal", "addEditModalCompany");

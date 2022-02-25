@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,14 @@ class CompanyController extends Controller
      */
     public function index()
     {
+        $companys = null;
+
+        $companys = DB::table('companys')
+            ->select('id', 'name')
+            ->where('state', "=", "1")
+            ->get();
+
+        return json_encode($companys);
     }
 
     /**
