@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-3">
     <b-row class="my-1">
       <b-col sm="2">
         <label for="inicioConvenio" size="sm">Empresa:</label>
