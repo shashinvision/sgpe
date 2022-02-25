@@ -231,7 +231,7 @@
         </b-row>
 
         <!-- Info modal -->
-        <InfoModalCompanys :infoModal="infoModal" @datosTabla="datosTabla" />
+        <InfoModalCompanys :infoModal="infoModal" @refrescar="datosTabla" />
       </b-container>
       <!-- Fin Tabla mantenedor  -->
     </b-card-body>

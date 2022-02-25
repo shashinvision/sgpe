@@ -8,7 +8,11 @@
     <!-- <pre>{{ infoModal.name }}</pre> -->
     <b-button variant="info" @click="verForm"> editar </b-button>
     <b-button variant="danger" @click="deleteItem"> eliminar </b-button>
-    <FormAddEditCompany v-if="formActivo" :infoModal="infoModal" />
+    <FormAddEditCompany
+      v-if="formActivo"
+      :infoModal="infoModal"
+      @refrescar="refrescar"
+    />
   </b-modal>
 </template>
 
@@ -50,11 +54,14 @@ export default {
 
         this.deleteCompanysAction({ id: idCompany[1] });
         setTimeout(() => {
-          this.$emit("datosTabla", "");
+          this.$emit("refrescar", "");
 
           this.$root.$emit("bv::hide::modal", "info-modal");
         }, 500);
       }
+    },
+    refrescar() {
+      this.$emit("refrescar", "");
     },
   },
 };

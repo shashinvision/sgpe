@@ -78,7 +78,7 @@ const companys = {
     },
     async updateCompanysAction({ commit, state }, payload) {
       const data = {
-        nameo: payload.name,
+        name: payload.datos.name,
         state: 1,
       };
 
@@ -108,8 +108,6 @@ const companys = {
         });
     },
     async deleteCompanysAction({ commit, state }, payload) {
-      alert(payload.id);
-
       const data = {
         state: 0,
       };

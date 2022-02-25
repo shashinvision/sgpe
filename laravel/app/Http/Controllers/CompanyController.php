@@ -79,7 +79,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request, Company $company, $id)
     {
         $data = $request->all(['name']);
         $respuesta = $company::findOrFail($id);
