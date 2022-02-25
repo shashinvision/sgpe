@@ -6,13 +6,13 @@
     :title="infoModal.title"
     size="xl"
   >
-    <FormAddEditCompany :infoModal="infoModal" />
+    <FormAddEditCompany :infoModal="infoModal" @refrescar="refrescar" />
   </b-modal>
 </template>
 
 <script>
 import FormAddEditCompany from "./FormAddEditCompany.vue";
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 export default {
   name: "SgpeAddmodalCompany",
   components: {
@@ -35,17 +35,15 @@ export default {
     datos() {
       const datos = {
         name: "",
-        dateStart: "",
-        dateEnd: "",
-        document: "",
-        archivo: null,
       };
       return datos;
     },
   },
 
   methods: {
-    ...mapActions("convenios", {}),
+    refrescar() {
+      this.$emit("refrescar", "");
+    },
   },
 };
 </script>

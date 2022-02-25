@@ -59,16 +59,13 @@ export default {
 
   methods: {
     ...mapActions("companys", {
-      setConvenios: "setConveniosAction",
+      setCompanys: "setCompanysAction",
       updateConvenios: "updateConveniosAction",
       cleanMessage: "cleanMessageAction",
     }),
     addEdit() {
       if (this.infoModal.title === "Añadir Empresa") {
-        // Code to Add
-        // console.log("datos en add", this.datos);
-        // console.log("this.infoModal.content", this.infoModal);
-        this.setConvenios(this.datos);
+        this.setCompanys(this.datos);
         setTimeout(() => {
           this.limpieza();
         }, 1000);

@@ -43,7 +43,10 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        Company::create($data);
+        return json_encode("Convenio creado con éxito.");
     }
 
     /**

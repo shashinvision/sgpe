@@ -40,13 +40,10 @@ Route::group([
             'user',
             'AuthController@user'
         );
+        // Convenios
         Route::get(
             '/convenios/{idCompanys}',
             [ConvenioController::class, 'index']
-        );
-        Route::get(
-            '/companys',
-            [CompanyController::class, 'index']
         );
         Route::post(
             '/convenio',
@@ -63,6 +60,16 @@ Route::group([
         Route::post(
             '/convenio/estado/{id}',
             [ConvenioController::class, 'activaDesactiva']
+        );
+
+        // Companys
+        Route::get(
+            '/companys',
+            [CompanyController::class, 'index']
+        );
+        Route::post(
+            '/company',
+            [CompanyController::class, 'store']
         );
         // Route::get(
         //     '/task/{id?}',

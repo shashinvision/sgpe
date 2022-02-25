@@ -9,6 +9,13 @@ class Company extends Model
 {
     use HasFactory;
 
+    public $table = 'companys'; // para especificar la tabla en la BBDD
+
+    protected $fillable = [
+        'name',
+        'state',
+    ];
+
     public function users()
     {
         return $this->hasMany(User::class);
