@@ -119,10 +119,10 @@
           </b-col>
         </b-row> -->
 
-        <b-row>
+        <b-row class="mb-3">
           <b-col lg="6" class="my-1">
             <b-form-group
-              label="Filter"
+              label="Filtro"
               label-for="filter-input"
               label-cols-sm="3"
               label-align-sm="right"
@@ -134,12 +134,12 @@
                   id="filter-input"
                   v-model="filter"
                   type="search"
-                  placeholder="Type to Search"
+                  placeholder="Búsqueda..."
                 ></b-form-input>
 
                 <b-input-group-append>
                   <b-button :disabled="!filter" @click="filter = ''"
-                    >Clear</b-button
+                    >Limpiar</b-button
                   >
                 </b-input-group-append>
               </b-input-group>
@@ -164,7 +164,7 @@
           @filtered="onFiltered"
         >
           <template #cell(name)="row">
-            {{ row.value.first }} {{ row.value.last }}
+            {{ row.value }}
           </template>
 
           <template #cell(actions)="row">
@@ -247,60 +247,50 @@ export default {
     return {
       items: [
         {
-          isActive: true,
-          age: 40,
-          name: { first: "Dickerson", last: "Macdonald" },
+          mail: "1lore10@lorem.cl",
+          name: "1Dickerson Macdonald",
         },
-        { isActive: false, age: 21, name: { first: "Larsen", last: "Shaw" } },
         {
-          isActive: false,
-          age: 9,
-          name: { first: "Mini", last: "Navarro" },
-          _rowVariant: "success",
+          mail: "2lore10@lorem.cl",
+          name: "2Dickerson Macdonald",
         },
-        { isActive: false, age: 89, name: { first: "Geneva", last: "Wilson" } },
-        { isActive: true, age: 38, name: { first: "Jami", last: "Carney" } },
-        { isActive: false, age: 27, name: { first: "Essie", last: "Dunlap" } },
-        { isActive: true, age: 40, name: { first: "Thor", last: "Macdonald" } },
         {
-          isActive: true,
-          age: 87,
-          name: { first: "Larsen", last: "Shaw" },
-          _cellVariants: { age: "danger", isActive: "warning" },
+          mail: "3lore10@lorem.cl",
+          name: "3Dickerson Macdonald",
         },
-        { isActive: false, age: 26, name: { first: "Mitzi", last: "Navarro" } },
         {
-          isActive: false,
-          age: 22,
-          name: { first: "Genevieve", last: "Wilson" },
+          mail: "4lore10@lorem.cl",
+          name: "4Dickerson Macdonald",
         },
-        { isActive: true, age: 38, name: { first: "John", last: "Carney" } },
-        { isActive: false, age: 29, name: { first: "Dick", last: "Dunlap" } },
+        {
+          mail: "5lore10@lorem.cl",
+          name: "5Dickerson Macdonald",
+        },
       ],
       fields: [
         {
           key: "name",
-          label: "Person full name",
+          label: "Nombre de usuario",
           sortable: true,
           sortDirection: "desc",
         },
         {
-          key: "age",
-          label: "Person age",
+          key: "mail",
+          label: "Correo de usuario",
           sortable: true,
           class: "text-center",
         },
-        {
-          key: "isActive",
-          label: "Is Active",
-          formatter: (value) => {
-            return value ? "Yes" : "No";
-          },
-          sortable: true,
-          sortByFormatted: true,
-          filterByFormatted: true,
-        },
-        { key: "actions", label: "Actions" },
+        // {
+        //   key: "isActive",
+        //   label: "Is Active",
+        //   formatter: (value) => {
+        //     return value ? "Yes" : "No";
+        //   },
+        //   sortable: true,
+        //   sortByFormatted: true,
+        //   filterByFormatted: true,
+        // },
+        { key: "actions", label: "Acciones" },
       ],
       totalRows: 1,
       currentPage: 1,
