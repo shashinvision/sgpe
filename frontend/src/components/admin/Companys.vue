@@ -2,7 +2,7 @@
   <b-card title="Mantenedor de Empresas">
     <b-card-body class="text-center">
       <b-card-text
-        >En este mantenedor podras crear, editar y eliminar
+        >En este mantenedor podrás crear, editar y eliminar
         Empresas.</b-card-text
       >
 
