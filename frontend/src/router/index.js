@@ -28,6 +28,10 @@ const routes = [
   {
     path: "/Admin",
     name: "Admin",
+    meta: {
+      // ruta protegida
+      requiresAuth: true,
+    },
     component: () => import("../views/Admin.vue"),
   },
 ];
