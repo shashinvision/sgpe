@@ -40,9 +40,9 @@
             <b id="colorMenu">Menú</b>
           </template>
           <b-dropdown-item href="#">Perfil</b-dropdown-item>
-          <b-dropdown-item v-if="user_data.id_permissions === 1"
-            >Administración</b-dropdown-item
-          >
+          <b-dropdown-item v-if="user_data.id_permissions === 1">
+            <router-link :to="{ name: 'Admin' }">Administración</router-link>
+          </b-dropdown-item>
           <b-dropdown-item v-if="auth" @click="logoutNow"
             >Cerrar sesión</b-dropdown-item
           >
