@@ -119,6 +119,12 @@
           </b-col>
         </b-row> -->
 
+        <b-row>
+          <b-col lg="6" class="my-1">
+            <b-button variant="info" @click="addEdit">Añadir Empresa</b-button>
+          </b-col>
+        </b-row>
+
         <b-row class="mb-3">
           <b-col lg="6" class="my-1">
             <b-form-group
@@ -149,7 +155,6 @@
 
         <!-- Main table element -->
         <b-table
-          responsive
           :items="items"
           :fields="fields"
           :current-page="currentPage"
@@ -230,14 +235,17 @@
       </b-container>
       <!-- Fin Tabla mantenedor  -->
     </b-card-body>
+    <!-- Info modal -->
+    <AddModalCompany :infoModal="infoModal" />
   </b-card>
 </template>
 
 <script>
 import InfoModal from "./InfoModal.vue";
+import AddModalCompany from "./AddModalCompany.vue";
 export default {
   name: "SgpeEmpresas",
-  components: { InfoModal },
+  components: { InfoModal, AddModalCompany },
   data() {
     return {
       items: [
@@ -318,6 +326,10 @@ export default {
     this.totalRows = this.items.length;
   },
   methods: {
+    addEdit() {
+      this.infoModal.title = `Añadir compñia`;
+      this.$root.$emit("bv::show::modal", "addEditModalCompany");
+    },
     info(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);
