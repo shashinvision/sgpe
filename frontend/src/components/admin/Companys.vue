@@ -236,7 +236,7 @@
       <!-- Fin Tabla mantenedor  -->
     </b-card-body>
     <!-- Info modal -->
-    <AddModalCompany :infoModal="infoModal" />
+    <AddModalCompany :infoModal="infoModal" @refrescar="datosTabla" />
   </b-card>
 </template>
 
@@ -287,7 +287,7 @@ export default {
       infoModal: {
         id: "info-modal",
         title: "",
-        content: "",
+        name: "",
         default: false,
       },
     };
@@ -320,12 +320,13 @@ export default {
       }, 500);
     },
     addEdit() {
-      this.infoModal.title = `Añadir compñia`;
+      this.infoModal.title = `Añadir Empresa`;
       this.$root.$emit("bv::show::modal", "addEditModalCompany");
     },
     info(item, index, button) {
-      this.infoModal.title = `Row index: ${index}`;
-      this.infoModal.content = JSON.stringify(item, null, 2);
+      this.infoModal.title = `Empresa id #${item.id}`;
+      this.infoModal.name = item.name;
+      // this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
     },
 

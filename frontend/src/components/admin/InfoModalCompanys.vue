@@ -5,10 +5,10 @@
     hide-footer
     @hide="resetInfoModal"
   >
-    <!-- <pre>{{ infoModal.content }}</pre> -->
+    <!-- <pre>{{ infoModal.name }}</pre> -->
     <b-button variant="info" @click="verForm"> editar </b-button>
     <b-button variant="danger"> eliminar </b-button>
-    <FormAddEditCompany v-if="formActivo" />
+    <FormAddEditCompany v-if="formActivo" :infoModal="infoModal" />
   </b-modal>
 </template>
 
@@ -33,7 +33,7 @@ export default {
   methods: {
     resetInfoModal() {
       this.infoModal.title = "";
-      this.infoModal.content = "";
+      this.infoModal.name = "";
     },
     verForm() {
       return (this.formActivo = !this.formActivo);

@@ -9,33 +9,14 @@
           id="nombreEmpresa"
           placeholder="Nombre empresa..."
           size="sm"
+          v-model="datos.name"
         ></b-form-input>
       </b-col>
     </b-row>
-    <b-row class="my-1">
-      <b-col sm="2">
-        <label for="inicioConvenio" size="sm">Inicio:</label>
-      </b-col>
-      <b-col sm="10">
-        <b-form-input type="date" id="inicioConvenio" size="sm"></b-form-input>
-      </b-col>
-    </b-row>
-    <b-row class="my-1">
-      <b-col sm="2">
-        <label for="finConvenio" size="sm">Fin:</label>
-      </b-col>
-      <b-col sm="10">
-        <b-form-input type="date" id="finConvenio" size="sm"></b-form-input>
-      </b-col>
-    </b-row>
-    <b-row class="my-1">
-      <b-col sm="2">
-        <label for="documentoConvenio" size="sm">Archivo:</label>
-      </b-col>
-    </b-row>
+
     <b-row>
       <b-col lg="12" class="my-1 d-flex flex-row-reverse">
-        <i class="mensaje">mesaje</i>
+        <i class="mensaje">{{ API.message }}</i>
       </b-col>
     </b-row>
     <b-row>
@@ -49,21 +30,73 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
   name: "SgpeFormAddEditCompany",
 
   data() {
     return {};
   },
-
+  computed: {
+    ...mapState("companys", ["API"]),
+    datos() {
+      const datos = {
+        name: this.infoModal.name,
+      };
+      return datos;
+    },
+  },
+  props: {
+    infoModal: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+  },
   mounted() {},
 
   methods: {
+    ...mapActions("companys", {
+      setConvenios: "setConveniosAction",
+      updateConvenios: "updateConveniosAction",
+      cleanMessage: "cleanMessageAction",
+    }),
     addEdit() {
-      alert("ADD edit ");
+      if (this.infoModal.title === "Añadir Empresa") {
+        // Code to Add
+        // console.log("datos en add", this.datos);
+        // console.log("this.infoModal.content", this.infoModal);
+        this.setConvenios(this.datos);
+        setTimeout(() => {
+          this.limpieza();
+        }, 1000);
+      } else {
+        const idEdit = this.infoModal.title.split("#");
+        // console.log("id edit", idEdit[1]);
+        this.updateConvenios({
+          datos: { ...this.datos },
+          idEdit: idEdit[1],
+        });
+        setTimeout(() => {
+          this.limpieza();
+        }, 1000);
+      }
+    },
+    limpieza() {
+      this.datos.name = "";
+      this.cleanMessage();
+      // Para cerrar el modal y para abrir es igual pero se cambia el hide por show
+      this.$root.$emit("bv::hide::modal", "addEditModalCompany");
+      this.$emit("refrescar", "");
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.mensaje {
+  color: green;
+}
+</style>
