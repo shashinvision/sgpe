@@ -12,11 +12,11 @@ const companys = {
   },
   mutations: {
     getCompanysMutation(state, payload) {
-      // console.log("getConveniosMutation payload", payload);
+      // console.log("getCompanysMutation payload", payload);
       state.companys = payload;
     },
     setCompanysMutation(state, payload) {
-      // console.log("setConveniosMutation payload", payload);
+      // console.log("setCompanysMutation payload", payload);
       state.API.message = payload;
     },
     cleanMessageMutation(state) {
@@ -76,55 +76,23 @@ const companys = {
           console.error("Error al intentar ingresar", err);
         });
     },
-    async updateConveniosAction({ commit, state }, payload) {
-      // const data = {
-      //   name_company_convenio: payload.name,
-      //   created_by_user_id: store._modules.root.state.access.user_data.id,
-      //   companys_id: store._modules.root.state.access.user_data.id_companys,
-      //   states_id: 2,
-      //   document_path: payload.archivo.name,
-      //   date_start: payload.dateStart,
-      //   date_end: payload.dateEnd,
-      //   state: 1,
-      // };
-
-      // console.log("updateConveniosAction commit", commit);
-      // console.log("updateConveniosAction state", state);
-      // console.log("updateConveniosAction payload", payload);
-
-      let data = new FormData();
-      data.append("name_company_convenio", payload.datos.name);
-      data.append(
-        "edit_by_user_id",
-        store._modules.root.state.access.user_data.id
-      );
-      data.append(
-        "companys_id",
-        store._modules.root.state.access.user_data.id_companys
-      );
-      data.append("states_id", 2);
-      data.append(
-        "document_path",
-        payload.datos.archivo != null
-          ? payload.datos.archivo
-          : payload.datos.document
-      );
-      data.append("date_start", payload.datos.dateStart);
-      data.append("date_end", payload.datos.dateEnd);
-      data.append("state", 1);
+    async updateCompanysAction({ commit, state }, payload) {
+      const data = {
+        nameo: payload.name,
+        state: 1,
+      };
 
       await fetch(
-        state.API.baseURL + "/api/auth/convenio/edit/" + payload.idEdit,
+        state.API.baseURL + "/api/auth/company/edit/" + payload.idEdit,
         {
           method: "POST",
           headers: {
-            // "Content-Type": "application/json",
+            "Content-Type": "application/json",
             Authorization:
               "Bearer " + store._modules.root.state.access.access_token,
             "X-Requested-With": "XMLHttpRequest",
           },
-          // body: JSON.stringify(data), // body data type must match "Content-Type" header
-          body: data, // Cuando se usa FormData JSON.stringify, no se necesita body data type must match "Content-Type" header
+          body: JSON.stringify(data), // body data type must match "Content-Type" header
         }
       )
         .then((res) => {
@@ -133,18 +101,20 @@ const companys = {
         .then((payload) => {
           // console.log("Respuesta insert", payload);
 
-          commit("setConveniosMutation", payload);
+          commit("setCompanysMutation", payload);
         })
         .catch((err) => {
           console.error("Error al intentar ingresar", err);
         });
     },
-    async deleteConveniosAction({ commit, state }, payload) {
+    async deleteCompanysAction({ commit, state }, payload) {
+      alert(payload.id);
+
       const data = {
         state: 0,
       };
       await fetch(
-        state.API.baseURL + "/api/auth/convenio/delete/" + payload.id,
+        state.API.baseURL + "/api/auth/company/delete/" + payload.id,
         {
           method: "POST",
           headers: {
@@ -162,38 +132,7 @@ const companys = {
         .then((payload) => {
           // console.log("Respuesta insert", payload);
 
-          commit("setConveniosMutation", payload);
-        })
-        .catch((err) => {
-          console.error("Error al intentar ingresar", err);
-        });
-    },
-    async activarDesactivarConveniosAction({ commit, state }, payload) {
-      const data = {
-        states_id: payload.states_id,
-        approved_by_user_id: payload.approved_by_user_id,
-        disapproved_by_user_id: payload.disapproved_by_user_id,
-      };
-      await fetch(
-        state.API.baseURL + "/api/auth/convenio/estado/" + payload.id,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer " + store._modules.root.state.access.access_token,
-            "X-Requested-With": "XMLHttpRequest",
-          },
-          body: JSON.stringify(data), // body data type must match "Content-Type" header
-        }
-      )
-        .then((res) => {
-          return res.json();
-        })
-        .then((payload) => {
-          // console.log("Respuesta insert", payload);
-
-          commit("setConveniosMutation", payload);
+          commit("setCompanysMutation", payload);
         })
         .catch((err) => {
           console.error("Error al intentar ingresar", err);

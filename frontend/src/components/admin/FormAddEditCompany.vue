@@ -60,7 +60,7 @@ export default {
   methods: {
     ...mapActions("companys", {
       setCompanys: "setCompanysAction",
-      updateConvenios: "updateConveniosAction",
+      updateCompanys: "updateCompanysAction",
       cleanMessage: "cleanMessageAction",
     }),
     addEdit() {
@@ -72,7 +72,7 @@ export default {
       } else {
         const idEdit = this.infoModal.title.split("#");
         // console.log("id edit", idEdit[1]);
-        this.updateConvenios({
+        this.updateCompanys({
           datos: { ...this.datos },
           idEdit: idEdit[1],
         });

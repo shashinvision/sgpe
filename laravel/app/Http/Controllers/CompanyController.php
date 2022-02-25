@@ -19,6 +19,7 @@ class CompanyController extends Controller
 
         $companys = DB::table('companys')
             ->select('id', 'name')
+            ->where('id', "<>", "1")
             ->where('state', "=", "1")
             ->get();
 
@@ -46,7 +47,7 @@ class CompanyController extends Controller
         $data = $request->all();
 
         Company::create($data);
-        return json_encode("Convenio creado con éxito.");
+        return json_encode("Empresa creado con éxito.");
     }
 
     /**
@@ -80,7 +81,12 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $data = $request->all(['name']);
+        $respuesta = $company::findOrFail($id);
+
+        // $respuesta->update($request->all(['document_path', 'date_start', 'date_end', 'companys_id']));
+        $respuesta->update($data);
+        return json_encode("Empresa editado con éxito.");
     }
 
     /**
@@ -89,8 +95,11 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy(Company $company, Request $request, $id)
     {
-        //
+        $data = $request->all(['state']);
+        $respuesta = $company::findOrFail($id);
+        $respuesta->update($data);
+        return json_encode("Empresa eliminada con éxito.");
     }
 }

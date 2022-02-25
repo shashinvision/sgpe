@@ -71,6 +71,14 @@ Route::group([
             '/company',
             [CompanyController::class, 'store']
         );
+        Route::post(
+            '/company/edit/{id}',
+            [CompanyController::class, 'update']
+        );
+        Route::post(
+            '/company/delete/{id}',
+            [CompanyController::class, 'destroy']
+        );
         // Route::get(
         //     '/task/{id?}',
         //     'TaskController@index'
