@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConvenioController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsuariosController;
 
 /*
@@ -80,6 +81,13 @@ Route::group([
             '/company/delete/{id}',
             [CompanyController::class, 'destroy']
         );
+
+        // Permisos
+        Route::get(
+            '/permissions',
+            [PermissionController::class, 'index']
+        );
+
 
         // Usuarios
         Route::get(

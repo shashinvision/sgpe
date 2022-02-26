@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
-class PermissionsController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,15 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        //
+        $permissions = null;
+
+        $permissions = DB::table('permissions')
+            ->select('id', 'name')
+            ->where('id', "<>", "1")
+            ->where('state', "=", "1")
+            ->get();
+
+        return json_encode($permissions);
     }
 
     /**

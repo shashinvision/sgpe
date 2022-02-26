@@ -24,6 +24,42 @@
         ></b-form-input>
       </b-col>
       <b-col sm="2">
+        <label for="companys" size="sm">Compañias:</label>
+      </b-col>
+      <b-col sm="10">
+        <b-form-select
+          v-model="selectedCompanys"
+          :options="companysOption"
+          class="mb-3"
+        >
+          <!-- This slot appears above the options from 'options' prop -->
+          <template #first>
+            <b-form-select-option :value="null" disabled
+              >-- Compañias --</b-form-select-option
+            >
+          </template>
+        </b-form-select>
+      </b-col>
+
+      <b-col sm="2">
+        <label for="permissions" size="sm">Permisos:</label>
+      </b-col>
+      <b-col sm="10">
+        <b-form-select
+          v-model="selectedPermissions"
+          :options="permissionsOption"
+          class="mb-3"
+        >
+          <!-- This slot appears above the options from 'options' prop -->
+          <template #first>
+            <b-form-select-option :value="null" disabled
+              >-- Permisos --</b-form-select-option
+            >
+          </template>
+        </b-form-select>
+      </b-col>
+
+      <b-col sm="2">
         <label for="passwordUsuario" size="sm">Contraseña:</label>
       </b-col>
       <b-col sm="10">
@@ -59,14 +95,43 @@ export default {
   name: "SgpeFormAddEditUsuario",
 
   data() {
-    return {};
+    return {
+      selectedCompanys: this.infoModal.company,
+      selectedPermissions: this.infoModal.permission,
+    };
   },
   computed: {
     ...mapState("usuarios", ["API"]),
+    ...mapState("permissions", ["permissions"]),
+    ...mapState("companys", ["companys"]),
+    companysOption() {
+      let options = [];
+      for (let i = 0; i < this.companys.length; i++) {
+        options.push({
+          text: this.companys[i].name,
+          value: this.companys[i].id,
+        });
+      }
+
+      return options;
+    },
+    permissionsOption() {
+      let options = [];
+      for (let i = 0; i < this.permissions.length; i++) {
+        options.push({
+          text: this.permissions[i].name,
+          value: this.permissions[i].id,
+        });
+      }
+
+      return options;
+    },
     datos() {
       const datos = {
         name: this.infoModal.name,
         email: this.infoModal.email,
+        id_permissions: this.infoModal.permission,
+        id_companys: this.infoModal.company,
         password: this.infoModal.password,
       };
       return datos;
@@ -80,9 +145,18 @@ export default {
       },
     },
   },
-  mounted() {},
+  mounted() {
+    this.getCompanys();
+    this.getPermissions();
+  },
 
   methods: {
+    ...mapActions("companys", {
+      getCompanys: "getCompanysAction",
+    }),
+    ...mapActions("permissions", {
+      getPermissions: "getPermissionsAction",
+    }),
     ...mapActions("usuarios", {
       setUsuarios: "setUsuariosAction",
       updateUsuarios: "updateUsuariosAction",

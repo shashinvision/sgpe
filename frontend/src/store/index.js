@@ -4,6 +4,7 @@ import access from "./access";
 import convenios from "./convenios";
 import companys from "./companys";
 import usuarios from "./usuarios";
+import permissions from "./permissions";
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     access,
     convenios,
     companys,
-    usuarios
+    usuarios,
+    permissions,
   },
 });
