@@ -59,7 +59,6 @@
           </template>
         </b-form-select>
       </b-col>
-
       <b-col sm="2">
         <label for="passwordUsuario" size="sm">Contraseña:</label>
       </b-col>

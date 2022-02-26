@@ -18,7 +18,7 @@ class UsuariosController extends Controller
         $companys = null;
 
         $companys = DB::table('users as u')
-            ->select('u.id', 'u.name', 'u.email', 'p.name as permissions', 'c.name as company')
+            ->select('u.id', 'u.name', 'u.email', 'p.name as permission', 'p.id as id_permissions', 'c.id as id_companys', 'c.name as company')
             ->join('permissions as p', 'u.id_permissions', '=', 'p.id')
             ->join('companys as c', 'u.id_companys', '=', 'c.id')
             ->where('u.id', "<>", "1")

@@ -270,7 +270,7 @@ export default {
           sortDirection: "desc",
         },
         {
-          key: "permissions",
+          key: "permission",
           label: "Permisos",
           sortable: true,
           sortDirection: "desc",
@@ -306,6 +306,7 @@ export default {
         id: "info-modal",
         title: "",
         name: "",
+        email: "",
         id_companys: null,
         id_permissions: null,
         default: false,
@@ -344,8 +345,12 @@ export default {
       this.$root.$emit("bv::show::modal", "addEditModalUsuario");
     },
     info(item, index, button) {
+      console.log("infomodaldata item", item);
       this.infoModal.title = `Usuario id #${item.id}`;
       this.infoModal.name = item.name;
+      this.infoModal.email = item.email;
+      this.infoModal.id_companys = item.id_companys;
+      this.infoModal.id_permissions = item.id_permissions;
       // this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
     },

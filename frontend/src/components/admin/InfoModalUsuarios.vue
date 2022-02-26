@@ -40,6 +40,8 @@ export default {
     resetInfoModal() {
       this.infoModal.title = "";
       this.infoModal.name = "";
+      this.infoModal.id_companys = null;
+      this.infoModal.id_permissions = null;
     },
     verForm() {
       return (this.formActivo = !this.formActivo);
