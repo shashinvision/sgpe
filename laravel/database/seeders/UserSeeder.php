@@ -29,6 +29,7 @@ class UserSeeder extends Seeder
             'id_permissions' => 1,
             'email' => 'felipei.mancilla@gmail.com',
             'password' => bcrypt('1234'),
+            'state' => 1,
         ]);
     }
 }
