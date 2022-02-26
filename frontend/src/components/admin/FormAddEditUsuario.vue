@@ -20,6 +20,7 @@
           id="emailUsuario"
           placeholder="Email usuario..."
           size="sm"
+          type="email"
           v-model="datos.email"
         ></b-form-input>
       </b-col>
@@ -65,7 +66,7 @@
       <b-col sm="10">
         <b-form-input
           id="emailUsuario"
-          placeholder="Email usuario..."
+          placeholder="Contraseña usuario..."
           size="sm"
           type="password"
           v-model="datos.password"
