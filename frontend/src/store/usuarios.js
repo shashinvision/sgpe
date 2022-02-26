@@ -11,12 +11,12 @@ const usuarios = {
     usuarios: {},
   },
   mutations: {
-    getCompanysMutation(state, payload) {
-      // console.log("getCompanysMutation payload", payload);
+    getUsuariosMutation(state, payload) {
+      // console.log("getUsuariosMutation payload", payload);
       state.usuarios = payload;
     },
-    setCompanysMutation(state, payload) {
-      // console.log("setCompanysMutation payload", payload);
+    setUsuariosMutation(state, payload) {
+      // console.log("setUsuariosMutation payload", payload);
       state.API.message = payload;
     },
     cleanMessageMutation(state) {
@@ -24,7 +24,7 @@ const usuarios = {
     },
   },
   actions: {
-    async getCompanysAction({ commit, state }) {
+    async getUsuariosAction({ commit, state }) {
       // console.log("State Access ", store._modules.root.state.access.user_data);
 
       await fetch(state.API.baseURL + "/api/auth/usuarios/", {
@@ -40,16 +40,16 @@ const usuarios = {
           return res.json();
         })
         .then((payload) => {
-          let dataCompanys = payload;
-          // console.log("dataCompanys payload", dataCompanys);
+          let dataUsuarios = payload;
+          // console.log("dataUsuarios payload", dataUsuarios);
 
-          commit("getCompanysMutation", dataCompanys);
+          commit("getUsuariosMutation", dataUsuarios);
         })
         .catch((err) => {
           console.error("Error al intentar obtener los datos", err);
         });
     },
-    async setCompanysAction({ commit, state }, payload) {
+    async setUsuariosAction({ commit, state }, payload) {
       const data = {
         name: payload.name,
         state: 1,
@@ -70,13 +70,13 @@ const usuarios = {
         .then((payload) => {
           // console.log("Respuesta insert", payload);
 
-          commit("setCompanysMutation", payload);
+          commit("setUsuariosMutation", payload);
         })
         .catch((err) => {
           console.error("Error al intentar ingresar", err);
         });
     },
-    async updateCompanysAction({ commit, state }, payload) {
+    async updateUsuariosAction({ commit, state }, payload) {
       const data = {
         name: payload.datos.name,
         state: 1,
@@ -101,13 +101,13 @@ const usuarios = {
         .then((payload) => {
           // console.log("Respuesta insert", payload);
 
-          commit("setCompanysMutation", payload);
+          commit("setUsuariosMutation", payload);
         })
         .catch((err) => {
           console.error("Error al intentar ingresar", err);
         });
     },
-    async deleteCompanysAction({ commit, state }, payload) {
+    async deleteUsuariosAction({ commit, state }, payload) {
       const data = {
         state: 0,
       };
@@ -130,7 +130,7 @@ const usuarios = {
         .then((payload) => {
           // console.log("Respuesta insert", payload);
 
-          commit("setCompanysMutation", payload);
+          commit("setUsuariosMutation", payload);
         })
         .catch((err) => {
           console.error("Error al intentar ingresar", err);

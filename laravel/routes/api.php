@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConvenioController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\UsuariosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,25 @@ Route::group([
             '/company/delete/{id}',
             [CompanyController::class, 'destroy']
         );
+
+        // Usuarios
+        Route::get(
+            '/usuarios',
+            [UsuariosController::class, 'index']
+        );
+        Route::post(
+            '/usuario',
+            [UsuariosController::class, 'store']
+        );
+        Route::post(
+            '/usuario/edit/{id}',
+            [UsuariosController::class, 'update']
+        );
+        Route::post(
+            '/usuario/delete/{id}',
+            [UsuariosController::class, 'destroy']
+        );
+
         // Route::get(
         //     '/task/{id?}',
         //     'TaskController@index'

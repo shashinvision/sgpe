@@ -263,6 +263,12 @@ export default {
           sortable: true,
           sortDirection: "desc",
         },
+        {
+          key: "email",
+          label: "Email",
+          sortable: true,
+          sortDirection: "desc",
+        },
         // {
         //   key: "isActive",
         //   label: "Is Active",
@@ -293,7 +299,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("Usuarios", ["Usuarios"]),
+    ...mapState("usuarios", ["usuarios"]),
     sortOptions() {
       // Create an options list from our fields
       return this.fields
@@ -308,23 +314,23 @@ export default {
     this.datosTabla();
   },
   methods: {
-    ...mapActions("Usuarios", {
+    ...mapActions("usuarios", {
       getUsuarios: "getUsuariosAction",
     }),
     datosTabla() {
       this.getUsuarios();
       setTimeout(() => {
-        this.items = this.Usuarios;
+        this.items = this.usuarios;
         // Set the initial number of items
         this.totalRows = this.items.length;
       }, 500);
     },
     addEdit() {
-      this.infoModal.title = `Añadir Empresa`;
+      this.infoModal.title = `Añadir Usuario`;
       this.$root.$emit("bv::show::modal", "addEditModalUsuario");
     },
     info(item, index, button) {
-      this.infoModal.title = `Empresa id #${item.id}`;
+      this.infoModal.title = `Usuario id #${item.id}`;
       this.infoModal.name = item.name;
       // this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
