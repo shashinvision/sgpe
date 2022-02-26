@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
@@ -43,7 +44,10 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        User::create($data);
+        return json_encode("Empresa creado con éxito.");
     }
 
     /**
@@ -75,9 +79,22 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user, $id)
     {
-        //
+        $data = $request->all(['name', 'password']);
+
+        if ($data['password'] != "") {
+            $data['password'] = bcrypt($data['password']);
+        } else {
+            unset($data['password']);
+        }
+
+
+        $respuesta = $user::findOrFail($id);
+
+        // $respuesta->update($request->all(['document_path', 'date_start', 'date_end', 'companys_id']));
+        $respuesta->update($data);
+        return json_encode("Empresa editado con éxito.");
     }
 
     /**
@@ -86,8 +103,11 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user, Request $request, $id)
     {
-        //
+        $data = $request->all(['state']);
+        $respuesta = $user::findOrFail($id);
+        $respuesta->update($data);
+        return json_encode("Empresa eliminada con éxito.");
     }
 }
