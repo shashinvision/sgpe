@@ -29,7 +29,7 @@
       </b-col>
       <b-col sm="10">
         <b-form-select
-          v-model="selectedCompanys"
+          v-model="datos.id_companys"
           :options="companysOption"
           class="mb-3"
         >
@@ -47,7 +47,7 @@
       </b-col>
       <b-col sm="10">
         <b-form-select
-          v-model="selectedPermissions"
+          v-model="datos.id_permissions"
           :options="permissionsOption"
           class="mb-3"
         >
@@ -73,7 +73,7 @@
         ></b-form-input>
       </b-col>
     </b-row>
-
+    {{ datos }}
     <b-row>
       <b-col lg="12" class="my-1 d-flex flex-row-reverse">
         <i class="mensaje">{{ API.message }}</i>
@@ -183,6 +183,10 @@ export default {
     },
     limpieza() {
       this.datos.name = "";
+      this.datos.email = "";
+      this.datos.password = "";
+      this.datos.id_permissions = null;
+      this.datos.id_companys = null;
       this.cleanMessage();
       // Para cerrar el modal y para abrir es igual pero se cambia el hide por show
       this.$root.$emit("bv::hide::modal", "info-modal");
