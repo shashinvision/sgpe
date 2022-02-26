@@ -73,7 +73,6 @@
         ></b-form-input>
       </b-col>
     </b-row>
-    {{ datos }}
     <b-row>
       <b-col lg="12" class="my-1 d-flex flex-row-reverse">
         <i class="mensaje">{{ API.message }}</i>
@@ -131,8 +130,8 @@ export default {
       const datos = {
         name: this.infoModal.name,
         email: this.infoModal.email,
-        id_permissions: this.infoModal.permission,
-        id_companys: this.infoModal.company,
+        id_permissions: this.infoModal.id_permissions,
+        id_companys: this.infoModal.id_companys,
         password: this.infoModal.password,
       };
       return datos;

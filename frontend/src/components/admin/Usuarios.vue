@@ -306,8 +306,8 @@ export default {
         id: "info-modal",
         title: "",
         name: "",
-        company: null,
-        permission: null,
+        id_companys: null,
+        id_permissions: null,
         default: false,
       },
     };

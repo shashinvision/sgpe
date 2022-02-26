@@ -50,6 +50,7 @@ const usuarios = {
         });
     },
     async setUsuariosAction({ commit, state }, payload) {
+      // console.log("payload usuarios", payload);
       const data = {
         name: payload.name,
         email: payload.email,

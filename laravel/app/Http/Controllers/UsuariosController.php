@@ -58,6 +58,8 @@ class UsuariosController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'id_permissions' => $request->id_permissions,
+            'id_companys' => $request->id_companys,
             'password' => bcrypt($request->password),
             'state' => $request->state
         ]);
