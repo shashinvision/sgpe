@@ -53,6 +53,8 @@ const usuarios = {
       const data = {
         name: payload.name,
         email: payload.email,
+        id_permissions: payload.id_permissions,
+        id_companys: payload.id_companys,
         password: payload.password,
         state: 1,
       };
@@ -82,6 +84,8 @@ const usuarios = {
       const data = {
         name: payload.datos.name,
         password: payload.password,
+        id_permissions: payload.id_permissions,
+        id_companys: payload.id_companys,
         state: 1,
       };
 

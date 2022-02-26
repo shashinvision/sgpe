@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'id_companys',
+        'id_permissions',
         'state'
     ];
 

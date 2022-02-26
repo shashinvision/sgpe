@@ -49,6 +49,8 @@ class UsuariosController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
+            'id_permissions' => 'required|integer',
+            'id_companys' => 'required|integer',
             'password' => 'required|string',
             'state' => 'required|integer|size:1'
         ]);
