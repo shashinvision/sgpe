@@ -56,7 +56,7 @@ const usuarios = {
         password: payload.password,
         state: 1,
       };
-      await fetch(state.API.baseURL + "/api/auth/usuario", {
+      await fetch(state.API.baseURL + "/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

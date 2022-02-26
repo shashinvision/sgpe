@@ -17,10 +17,12 @@ class UsuariosController extends Controller
     {
         $companys = null;
 
-        $companys = DB::table('users')
-            ->select('id', 'name', 'email')
-            ->where('id', "<>", "1")
-            ->where('state', "=", "1")
+        $companys = DB::table('users as u')
+            ->select('u.id', 'u.name', 'u.email', 'p.name as permissions', 'c.name as company')
+            ->join('permissions as p', 'u.id_permissions', '=', 'p.id')
+            ->join('companys as c', 'u.id_companys', '=', 'c.id')
+            ->where('u.id', "<>", "1")
+            ->where('u.state', "=", "1")
             ->get();
 
         return json_encode($companys);
@@ -44,9 +46,19 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:users',
+            'password' => 'required|string',
+            'state' => 'required|integer|size:1'
+        ]);
 
-        User::create($data);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'state' => $request->state
+        ]);
         return json_encode("Empresa creado con éxito.");
     }
 

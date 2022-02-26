@@ -269,6 +269,18 @@ export default {
           sortable: true,
           sortDirection: "desc",
         },
+        {
+          key: "permissions",
+          label: "Permisos",
+          sortable: true,
+          sortDirection: "desc",
+        },
+        {
+          key: "company",
+          label: "Empresa",
+          sortable: true,
+          sortDirection: "desc",
+        },
         // {
         //   key: "isActive",
         //   label: "Is Active",
