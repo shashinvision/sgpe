@@ -2,7 +2,7 @@
   <div class="mt-3">
     <b-row class="my-1">
       <b-col sm="2">
-        <label for="nombreUsuario" size="sm">Usuario:</label>
+        <label for="nombreUsuario" size="sm">Nombre:</label>
       </b-col>
       <b-col sm="10">
         <b-form-input
@@ -12,10 +12,10 @@
           v-model="datos.name"
         ></b-form-input>
       </b-col>
-      <b-col sm="2">
+      <b-col sm="2" v-if="infoModal.title === 'Añadir Usuario'">
         <label for="emailUsuario" size="sm">Email:</label>
       </b-col>
-      <b-col sm="10">
+      <b-col sm="10" v-if="infoModal.title === 'Añadir Usuario'">
         <b-form-input
           id="emailUsuario"
           placeholder="Email usuario..."
@@ -23,10 +23,10 @@
           v-model="datos.email"
         ></b-form-input>
       </b-col>
-      <b-col sm="2" v-if="infoModal.title === 'Añadir Usuario'">
+      <b-col sm="2">
         <label for="passwordUsuario" size="sm">Contraseña:</label>
       </b-col>
-      <b-col sm="10" v-if="infoModal.title === 'Añadir Usuario'">
+      <b-col sm="10">
         <b-form-input
           id="emailUsuario"
           placeholder="Email usuario..."
