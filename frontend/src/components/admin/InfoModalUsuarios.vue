@@ -36,7 +36,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions("Usuarios", ["deleteUsuariosAction"]),
+    ...mapActions("usuarios", ["deleteUsuariosAction"]),
     resetInfoModal() {
       this.infoModal.title = "";
       this.infoModal.name = "";

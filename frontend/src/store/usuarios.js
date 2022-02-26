@@ -82,11 +82,12 @@ const usuarios = {
         });
     },
     async updateUsuariosAction({ commit, state }, payload) {
+      console.log("dataupdate usuario", payload);
       const data = {
         name: payload.datos.name,
-        password: payload.password,
-        id_permissions: payload.id_permissions,
-        id_companys: payload.id_companys,
+        password: payload.datos.password,
+        id_permissions: payload.datos.id_permissions,
+        id_companys: payload.datos.id_companys,
         state: 1,
       };
 

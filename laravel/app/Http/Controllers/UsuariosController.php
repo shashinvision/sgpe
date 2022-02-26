@@ -97,7 +97,7 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, User $user, $id)
     {
-        $data = $request->all(['name', 'password']);
+        $data = $request->all(['name', 'id_permissions', 'id_companys', 'password']);
 
         if ($data['password'] != "") {
             $data['password'] = bcrypt($data['password']);
