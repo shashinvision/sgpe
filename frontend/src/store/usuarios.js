@@ -52,9 +52,11 @@ const usuarios = {
     async setUsuariosAction({ commit, state }, payload) {
       const data = {
         name: payload.name,
+        email: payload.email,
+        password: payload.password,
         state: 1,
       };
-      await fetch(state.API.baseURL + "/api/auth/Usuario", {
+      await fetch(state.API.baseURL + "/api/auth/usuario", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,11 +81,12 @@ const usuarios = {
     async updateUsuariosAction({ commit, state }, payload) {
       const data = {
         name: payload.datos.name,
+        password: payload.password,
         state: 1,
       };
 
       await fetch(
-        state.API.baseURL + "/api/auth/Usuario/edit/" + payload.idEdit,
+        state.API.baseURL + "/api/auth/usuario/edit/" + payload.idEdit,
         {
           method: "POST",
           headers: {
@@ -112,7 +115,7 @@ const usuarios = {
         state: 0,
       };
       await fetch(
-        state.API.baseURL + "/api/auth/Usuario/delete/" + payload.id,
+        state.API.baseURL + "/api/auth/usuario/delete/" + payload.id,
         {
           method: "POST",
           headers: {

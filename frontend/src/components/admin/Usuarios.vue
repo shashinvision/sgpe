@@ -121,7 +121,7 @@
 
         <b-row>
           <b-col lg="6" class="my-1">
-            <b-button variant="info" @click="addEdit">Añadir Empresa</b-button>
+            <b-button variant="info" @click="addEdit">Añadir Usuario</b-button>
           </b-col>
         </b-row>
 

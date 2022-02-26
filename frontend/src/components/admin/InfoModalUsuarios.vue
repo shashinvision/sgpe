@@ -8,7 +8,7 @@
     <!-- <pre>{{ infoModal.name }}</pre> -->
     <b-button variant="info" @click="verForm"> editar </b-button>
     <b-button variant="danger" @click="deleteItem"> eliminar </b-button>
-    <FormAddEditCompany
+    <FormAddEditUsuario
       v-if="formActivo"
       :infoModal="infoModal"
       @refrescar="refrescar"
@@ -18,10 +18,10 @@
 
 <script>
 import { mapActions } from "vuex";
-import FormAddEditCompany from "./FormAddEditCompany.vue";
+import FormAddEditUsuario from "./FormAddEditUsuario.vue";
 export default {
   name: "SgpeInfomodal",
-  components: { FormAddEditCompany },
+  components: { FormAddEditUsuario },
   data() {
     return {
       formActivo: false,
@@ -36,7 +36,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions("companys", ["deleteCompanysAction"]),
+    ...mapActions("Usuarios", ["deleteUsuariosAction"]),
     resetInfoModal() {
       this.infoModal.title = "";
       this.infoModal.name = "";
@@ -50,9 +50,9 @@ export default {
           "¡Alerta!, ¿Estas seguro de querer eliminar este registro?.\n\rEl registro no se visualizará en la tabla después de esta acción, pero sus datos se conservará en la base de datos de forma interna."
         )
       ) {
-        let idCompany = this.infoModal.title.split("#");
+        let idUsuario = this.infoModal.title.split("#");
 
-        this.deleteCompanysAction({ id: idCompany[1] });
+        this.deleteUsuariosAction({ id: idUsuario[1] });
         setTimeout(() => {
           this.$emit("refrescar", "");
 

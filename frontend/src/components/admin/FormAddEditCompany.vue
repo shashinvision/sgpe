@@ -2,7 +2,7 @@
   <div class="mt-3">
     <b-row class="my-1">
       <b-col sm="2">
-        <label for="inicioConvenio" size="sm">Empresa:</label>
+        <label for="nombreEmpresa" size="sm">Empresa:</label>
       </b-col>
       <b-col sm="10">
         <b-form-input
