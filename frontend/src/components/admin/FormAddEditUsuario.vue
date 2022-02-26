@@ -64,7 +64,7 @@
       </b-col>
       <b-col sm="10">
         <b-form-input
-          id="emailUsuario"
+          id="passwordUsuario"
           placeholder="Contraseña usuario..."
           size="sm"
           type="password"
