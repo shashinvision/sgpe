@@ -53,4 +53,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Convenio::class);
     }
+    public function permissions()
+    {
+        return $this->hasMany(User::class);
+    }
 }
