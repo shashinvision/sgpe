@@ -3,7 +3,9 @@
     <main class="form-signin">
       <form>
         <h1 class="h3 mb-3 fw-normal">Configuración Perfil</h1>
-        Bienvenido <b> {{ user_data.name }} </b>
+        <p>
+          Bienvenido <b> {{ dataLogin.name || user_data.name }} </b>
+        </p>
         <div class="form-floating mt-3">
           <label for="floatingInput">Email</label>
           <input
@@ -73,16 +75,26 @@
               v-model="dataLogin.passwordConf"
             />
           </div>
-          <i
-            style="color: red"
-            v-show="
-              dataLogin.passwordConf !== '' &&
-              dataLogin.password !== '' &&
-              dataLogin.passwordConf !== dataLogin.password
-            "
-          >
-            Las contraseñas no coinciden</i
-          >
+
+          <b-row>
+            <b-col lg="12" class="my-1 d-flex flex-row-reverse">
+              <i
+                style="color: red"
+                v-show="
+                  dataLogin.passwordConf !== '' &&
+                  dataLogin.password !== '' &&
+                  dataLogin.passwordConf !== dataLogin.password
+                "
+              >
+                Las contraseñas no coinciden</i
+              >
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col lg="12" class="my-1 d-flex flex-row-reverse">
+              <i style="color: blue">{{ API.message }}</i>
+            </b-col>
+          </b-row>
         </div>
         <!-- 
         <div class="checkbox mb-3">
@@ -90,7 +102,24 @@
             <input type="checkbox" value="remember-me" /> Remember me
           </label>
         </div> -->
-        <b-button class="w-100 btn btn-lg" variant="success" @click="acceso">
+        <b-button
+          class="w-100 btn btn-lg"
+          variant="success"
+          @click="editarPerfil"
+          :disabled="
+            (dataLogin.passwordConf != '' &&
+              dataLogin.passwordOld == '' &&
+              dataLogin.password == '') ||
+            (dataLogin.passwordOld != '' &&
+              dataLogin.passwordConf == '' &&
+              dataLogin.password == '') ||
+            (dataLogin.password != '' &&
+              dataLogin.passwordConf == '' &&
+              dataLogin.passwordOld == '') ||
+            (dataLogin.passwordOld !== '' &&
+              dataLogin.passwordConf !== dataLogin.password)
+          "
+        >
           Guardar
         </b-button>
         <!-- <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p> -->
@@ -112,25 +141,28 @@ export default {
         passwordOld: "",
         password: "",
         passwordConf: "",
+        idEdit: "",
       },
     };
   },
   computed: {
     ...mapState("access", ["user_data"]),
+    ...mapState("usuarios", ["API"]),
   },
   updated() {},
 
   methods: {
-    ...mapActions("access", {
+    ...mapActions("usuarios", {
       login: "loginAction",
+      perfilUpdate: "perfilUpdateAction",
+      cleanMessage: "cleanMessageAction",
     }),
-    async acceso() {
-      try {
-        await this.login(this.dataLogin);
-        this.$router.push({ name: "Home" });
-      } catch (error) {
-        console.error(error);
-      }
+    editarPerfil() {
+      this.dataLogin.idEdit = this.user_data.id;
+      this.perfilUpdate(this.dataLogin);
+      setTimeout(() => {
+        this.cleanMessage();
+      }, 3000);
     },
   },
 };

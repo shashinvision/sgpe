@@ -107,6 +107,13 @@ Route::group([
             [UsuariosController::class, 'destroy']
         );
 
+        // Perfil
+        Route::post(
+            '/perfil/{id}',
+            [UsuariosController::class, 'perfilUpdate']
+        );
+
+
         // Route::get(
         //     '/task/{id?}',
         //     'TaskController@index'

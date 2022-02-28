@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use DB;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
@@ -110,7 +112,43 @@ class UsuariosController extends Controller
 
         // $respuesta->update($request->all(['document_path', 'date_start', 'date_end', 'companys_id']));
         $respuesta->update($data);
-        return json_encode("Empresa editado con éxito.");
+        return json_encode("Usuario editado con éxito.");
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function perfilUpdate(Request $request, User $user, $id)
+    {
+
+        $data = $request->all(['name', 'passwordOld', 'password']);
+
+        if ($data['name'] == "") {
+            unset($data['name']);
+        }
+
+        if ($data['passwordOld'] == "" && $data['password'] == "") {
+            unset($data['passwordOld']);
+            unset($data['password']);
+        } else {
+            // Si la contaseña antigua es correcta se elimina del arreglo para crear la nueva, en caso contrario devuelve un error
+            if (Hash::check($data['passwordOld'], Auth::user()->password)) {
+                unset($data['passwordOld']);
+                $data['password'] = bcrypt($data['password']);
+            } else {
+                return json_encode("La contraseña antigua no es correcta.");
+            }
+        }
+
+        $respuesta = $user::findOrFail($id);
+
+        // $respuesta->update($request->all(['document_path', 'date_start', 'date_end', 'companys_id']));
+        $respuesta->update($data);
+        return json_encode("Usuario editado con éxito.");
     }
 
     /**
@@ -124,6 +162,6 @@ class UsuariosController extends Controller
         $data = $request->all(['state']);
         $respuesta = $user::findOrFail($id);
         $respuesta->update($data);
-        return json_encode("Empresa eliminada con éxito.");
+        return json_encode("Usuario eliminada con éxito.");
     }
 }

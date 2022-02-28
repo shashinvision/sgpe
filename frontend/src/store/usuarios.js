@@ -82,7 +82,7 @@ const usuarios = {
         });
     },
     async updateUsuariosAction({ commit, state }, payload) {
-      console.log("dataupdate usuario", payload);
+      // console.log("dataupdate usuario", payload);
       const data = {
         name: payload.datos.name,
         password: payload.datos.password,
@@ -133,6 +133,36 @@ const usuarios = {
           body: JSON.stringify(data), // body data type must match "Content-Type" header
         }
       )
+        .then((res) => {
+          return res.json();
+        })
+        .then((payload) => {
+          // console.log("Respuesta insert", payload);
+
+          commit("setUsuariosMutation", payload);
+        })
+        .catch((err) => {
+          console.error("Error al intentar ingresar", err);
+        });
+    },
+    async perfilUpdateAction({ commit, state }, payload) {
+      console.log("perfilUpdateAction payload", payload);
+      const data = {
+        name: payload.name,
+        passwordOld: payload.passwordOld,
+        password: payload.password,
+      };
+
+      await fetch(state.API.baseURL + "/api/auth/perfil/" + payload.idEdit, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer " + store._modules.root.state.access.access_token,
+          "X-Requested-With": "XMLHttpRequest",
+        },
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+      })
         .then((res) => {
           return res.json();
         })
