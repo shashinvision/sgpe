@@ -55,8 +55,8 @@ export default {
   data() {
     return {
       dataLogin: {
-        email: "felipei.mancilla@gmail.com",
-        password: "1234",
+        email: "",
+        password: "",
         remember_token: true,
       },
     };
