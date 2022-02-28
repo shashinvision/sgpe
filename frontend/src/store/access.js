@@ -18,7 +18,7 @@ const access = {
   },
   mutations: {
     loginMutation(state, dataLogin) {
-      console.log("loginMutation", dataLogin);
+      // console.log("loginMutation", dataLogin);
       if (
         dataLogin.message != undefined ||
         dataLogin.message == "Successfully logged out"

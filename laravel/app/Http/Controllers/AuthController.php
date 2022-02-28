@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,18 @@ class AuthController extends Controller
             ], 401);
 
         $user = $request->user();
+
+        // Extraigo los nombres del permiso de usuario que tiene y la compañía a la que pertenece
+        $datosUsuario = DB::table('users as u')
+            ->select('p.name as permissions', 'c.name as company')
+            ->join('permissions as p', 'p.id', '=', 'u.id_permissions')
+            ->join('companys as c', 'c.id', '=', 'u.id_companys')
+            ->where('u.id', '=', $user->id)
+            ->first();
+
+        $user['permissions'] = $datosUsuario->permissions;
+        $user['company'] = $datosUsuario->company;
+
         $tokenResult = $user->createToken('Personal Access Token');
 
         $token = $tokenResult->token;
@@ -69,6 +82,7 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse($token->expires_at)->toDateTimeString(),
             'user_data' => $user
+
         ]);
     }
 

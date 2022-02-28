@@ -34,6 +34,15 @@ const routes = [
     },
     component: () => import("../views/Admin.vue"),
   },
+  {
+    path: "/Perfil",
+    name: "Perfil",
+    meta: {
+      // ruta protegida
+      requiresAuth: true,
+    },
+    component: () => import("../views/Perfil.vue"),
+  },
 ];
 
 const router = new VueRouter({
