@@ -126,23 +126,40 @@ export default {
     }),
     addEdit() {
       if (this.infoModal.title === "Añadir Convenio") {
-        // Code to Add
-        // console.log("datos en add", this.datos);
-        // console.log("this.infoModal.content", this.infoModal);
-        this.setConvenios(this.datos);
-        setTimeout(() => {
-          this.limpieza();
-        }, 1000);
+        if (
+          this.datos.name === "" ||
+          this.datos.dateStart === "" ||
+          this.datos.dateEnd === "" ||
+          this.datos.archivo === null
+        ) {
+          alert("Debe completar todos los campos para seguir");
+        } else {
+          // Code to Add
+          // console.log("datos en add", this.datos);
+          // console.log("this.infoModal.content", this.infoModal);
+          this.setConvenios(this.datos);
+          setTimeout(() => {
+            this.limpieza();
+          }, 1000);
+        }
       } else {
-        const idEdit = this.infoModal.title.split("#");
-        // console.log("id edit", idEdit[1]);
-        this.updateConvenios({
-          datos: { ...this.datos },
-          idEdit: idEdit[1],
-        });
-        setTimeout(() => {
-          this.limpieza();
-        }, 1000);
+        if (
+          this.datos.name === "" ||
+          this.datos.dateStart === "" ||
+          this.datos.dateEnd === ""
+        ) {
+          alert("Debe completar todos los campos para seguir");
+        } else {
+          const idEdit = this.infoModal.title.split("#");
+          // console.log("id edit", idEdit[1]);
+          this.updateConvenios({
+            datos: { ...this.datos },
+            idEdit: idEdit[1],
+          });
+          setTimeout(() => {
+            this.limpieza();
+          }, 1000);
+        }
       }
     },
     storageUrl(data) {
