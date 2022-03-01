@@ -14,9 +14,8 @@ const convenios = {
     conveniosGet(state) {
       if (state.convenios.length === 0) {
         return JSON.parse(localStorage.getItem("convenios"));
-      } else {
-        return state.convenios;
       }
+      return state.convenios;
     },
   },
   mutations: {

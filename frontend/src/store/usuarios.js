@@ -14,9 +14,8 @@ const usuarios = {
     usuariosGet(state) {
       if (state.usuarios.length === 0) {
         return JSON.parse(localStorage.getItem("usuarios"));
-      } else {
-        return state.usuarios;
       }
+      return state.usuarios;
     },
   },
   mutations: {

@@ -14,9 +14,8 @@ const companys = {
     companysGet(state) {
       if (state.companys.length === 0) {
         return JSON.parse(localStorage.getItem("companys"));
-      } else {
-        return state.companys;
       }
+      return state.companys;
     },
   },
   mutations: {
