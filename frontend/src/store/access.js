@@ -90,7 +90,7 @@ const access = {
         })
         .catch(function (err) {
           commit("signinMutation", {
-            message: "Error al intentar ingresar",
+            message: "Error al intentar ingresar.",
           });
           setTimeout(() => {
             commit("signinMutation", {

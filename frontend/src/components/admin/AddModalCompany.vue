@@ -32,12 +32,6 @@ export default {
   },
   computed: {
     ...mapState("access", ["user_data"]),
-    datos() {
-      const datos = {
-        name: "",
-      };
-      return datos;
-    },
   },
 
   methods: {

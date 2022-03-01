@@ -64,21 +64,25 @@ export default {
       cleanMessage: "cleanMessageAction",
     }),
     addEdit() {
-      if (this.infoModal.title === "Añadir Empresa") {
-        this.setCompanys(this.datos);
-        setTimeout(() => {
-          this.limpieza();
-        }, 1000);
+      if (this.datos.name === "") {
+        alert("Debe ingresar un nombre.");
       } else {
-        const idEdit = this.infoModal.title.split("#");
-        // console.log("id edit", idEdit[1]);
-        this.updateCompanys({
-          datos: { ...this.datos },
-          idEdit: idEdit[1],
-        });
-        setTimeout(() => {
-          this.limpieza();
-        }, 1000);
+        if (this.infoModal.title === "Añadir Empresa") {
+          this.setCompanys(this.datos);
+          setTimeout(() => {
+            this.limpieza();
+          }, 1000);
+        } else {
+          const idEdit = this.infoModal.title.split("#");
+          // console.log("id edit", idEdit[1]);
+          this.updateCompanys({
+            datos: { ...this.datos },
+            idEdit: idEdit[1],
+          });
+          setTimeout(() => {
+            this.limpieza();
+          }, 1000);
+        }
       }
     },
     limpieza() {
@@ -86,6 +90,7 @@ export default {
       this.cleanMessage();
       // Para cerrar el modal y para abrir es igual pero se cambia el hide por show
       this.$root.$emit("bv::hide::modal", "info-modal");
+      this.$root.$emit("bv::hide::modal", "addEditModalCompany");
       this.$emit("refrescar", "");
     },
   },
