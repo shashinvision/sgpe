@@ -313,7 +313,7 @@ export default {
         });
     },
   },
-  created() {
+  mounted() {
     /*
      ? importante
      * Con el setTimeOut soluciono el problema de la reactividad del paso de los valores
