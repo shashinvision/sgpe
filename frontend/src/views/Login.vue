@@ -31,6 +31,7 @@
             v-model="dataLogin.password"
           />
         </div>
+        <i style="color: red">{{ message }}</i>
         <!-- 
         <div class="checkbox mb-3">
           <label>
@@ -47,7 +48,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "SgpeLogin",
@@ -62,8 +63,9 @@ export default {
     };
   },
 
-  mounted() {},
-
+  computed: {
+    ...mapState("access", ["message"]),
+  },
   methods: {
     ...mapActions("access", {
       login: "loginAction",

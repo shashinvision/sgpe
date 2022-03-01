@@ -86,10 +86,17 @@ const access = {
         })
         .then((payload) => {
           // console.log("respuesta login", payload);
-
           commit("loginMutation", payload);
         })
         .catch(function (err) {
+          commit("signinMutation", {
+            message: "Error al intentar ingresar",
+          });
+          setTimeout(() => {
+            commit("signinMutation", {
+              message: "",
+            });
+          }, 2500);
           console.error("Error al intentar ingresar", err);
         });
     },
