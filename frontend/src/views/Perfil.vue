@@ -5,7 +5,7 @@
         <h1 class="h3 mb-3 fw-normal">Configuración Perfil</h1>
         <p>
           Bienvenido
-          <b> {{ user_data.name || dataLogin.name }} </b>
+          <b> {{ user_data.name }} </b>
         </p>
         <div class="form-floating mt-3">
           <label for="floatingInput">Email</label>
