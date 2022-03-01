@@ -305,6 +305,9 @@ export default {
         });
     },
   },
+  created() {
+    this.datosTabla();
+  },
   mounted() {
     // Set the initial number of items
     this.datosTabla();

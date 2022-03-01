@@ -313,6 +313,9 @@ export default {
         });
     },
   },
+  created() {
+    this.datosTabla();
+  },
   mounted() {
     /*
      ? importante
