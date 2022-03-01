@@ -22,7 +22,7 @@ use App\Http\Controllers\UsuariosController;
 //     return $request->user();
 // });
 
-// Las 2 primeras rutas son públicas, y las 2 siguientes requieren de autenticación.
+// Solo el Login es publico, y las 2 siguientes requieren de authentication.
 Route::group([
     'middleware' => 'api',
     'namespace' => 'App\Http\Controllers',
@@ -34,7 +34,7 @@ Route::group([
     );
 
     Route::group([
-        'middleware' => 'auth:api'
+        'middleware' => 'auth:api' // La ruta en el front debe pasar por el middleware => http://localhost:8888/api/auth/...
     ], function () {
         Route::post('signup', 'AuthController@signUp');
         Route::get('logout', 'AuthController@logout');
