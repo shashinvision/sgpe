@@ -163,20 +163,34 @@ export default {
     }),
     addEdit() {
       if (this.infoModal.title === "Añadir Usuario") {
-        this.setUsuarios(this.datos);
-        setTimeout(() => {
-          this.limpieza();
-        }, 1000);
+        if (
+          this.datos.name === "" ||
+          this.datos.email === "" ||
+          this.datos.id_companys === null ||
+          this.datos.id_permissions === null ||
+          this.datos.password === ""
+        ) {
+          alert("Debe llenar todos los campos.");
+        } else {
+          this.setUsuarios(this.datos);
+          setTimeout(() => {
+            this.limpieza();
+          }, 1000);
+        }
       } else {
-        const idEdit = this.infoModal.title.split("#");
-        // console.log("id edit", idEdit[1]);
-        this.updateUsuarios({
-          datos: { ...this.datos },
-          idEdit: idEdit[1],
-        });
-        setTimeout(() => {
-          this.limpieza();
-        }, 1000);
+        if (this.datos.name === "") {
+          alert("Debe llenar el campo nombre.");
+        } else {
+          const idEdit = this.infoModal.title.split("#");
+          // console.log("id edit", idEdit[1]);
+          this.updateUsuarios({
+            datos: { ...this.datos },
+            idEdit: idEdit[1],
+          });
+          setTimeout(() => {
+            this.limpieza();
+          }, 1000);
+        }
       }
     },
     limpieza() {
@@ -188,6 +202,7 @@ export default {
       this.cleanMessage();
       // Para cerrar el modal y para abrir es igual pero se cambia el hide por show
       this.$root.$emit("bv::hide::modal", "info-modal");
+      this.$root.$emit("bv::hide::modal", "addEditModalUsuario");
       this.$emit("refrescar", "");
     },
   },
