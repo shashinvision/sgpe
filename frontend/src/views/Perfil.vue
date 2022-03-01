@@ -5,7 +5,7 @@
         <h1 class="h3 mb-3 fw-normal">Configuración Perfil</h1>
         <p>
           Bienvenido
-          <b> {{ dataLogin.name || user_data.name }} </b>
+          <b> {{ user_data.name || dataLogin.name }} </b>
         </p>
         <div class="form-floating mt-3">
           <label for="floatingInput">Email</label>
@@ -138,7 +138,7 @@ export default {
   data() {
     return {
       dataLogin: {
-        name: localStorage.getItem("userName") || "",
+        name: "",
         passwordOld: "",
         password: "",
         passwordConf: "",
@@ -161,7 +161,7 @@ export default {
     editarPerfil() {
       this.dataLogin.idEdit = this.user_data.id;
       this.perfilUpdate(this.dataLogin);
-      localStorage.setItem("userName", this.dataLogin.name);
+
       setTimeout(() => {
         this.cleanMessage();
       }, 3000);
