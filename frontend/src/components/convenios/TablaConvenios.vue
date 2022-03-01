@@ -314,17 +314,13 @@ export default {
     },
   },
   created() {
-    this.datosTabla();
-  },
-  mounted() {
     /*
      ? importante
      * Con el setTimeOut soluciono el problema de la reactividad del paso de los valores
      *  de la props, se puede con una propiedad computada, pero inicia primero como objeto lo
-     * que genera error, por lo que un setTImeOut no genera este error si el primera valor es
+     * que genera error, por lo que un setTimeOut no genera este error si el primera valor es
      * un arreglo vacío
      */
-
     this.datosTabla();
   },
   methods: {
