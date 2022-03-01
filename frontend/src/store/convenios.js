@@ -10,10 +10,27 @@ const convenios = {
     },
     convenios: {},
   },
+  getters: {
+    conveniosGet(state) {
+      if (state.convenios.length === 0) {
+        return JSON.parse(localStorage.getItem("convenios"));
+      } else {
+        return state.convenios;
+      }
+    },
+  },
   mutations: {
     getConveniosMutation(state, payload) {
-      // console.log("getConveniosMutation payload", payload);
+      // Para obtener reactividad con Vuex tambien configuro los datos en el local storage
+      // Para luego extraerlos desde conveniosGet en caso que el estado este vacío.
       state.convenios = payload;
+      localStorage.setItem("convenios", JSON.stringify(payload));
+
+      // console.log("getConveniosMutation convenios", state.convenios);
+      // console.log(
+      //   "getConveniosMutation localstorage",
+      //   JSON.parse(localStorage.getItem("convenios"))
+      // );
     },
     setConveniosMutation(state, payload) {
       // console.log("setConveniosMutation payload", payload);

@@ -243,7 +243,7 @@
 <script>
 import InfoModalCompanys from "./InfoModalCompanys.vue";
 import AddModalCompany from "./AddModalCompany.vue";
-import { mapState, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "SgpeEmpresas",
   components: { InfoModalCompanys, AddModalCompany },
@@ -293,7 +293,9 @@ export default {
     };
   },
   computed: {
-    ...mapState("companys", ["companys"]),
+    ...mapGetters("companys", {
+      companys: "companysGet",
+    }),
     sortOptions() {
       // Create an options list from our fields
       return this.fields

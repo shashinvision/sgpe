@@ -10,10 +10,20 @@ const companys = {
     },
     companys: {},
   },
+  getters: {
+    companysGet(state) {
+      if (state.companys.length === 0) {
+        return JSON.parse(localStorage.getItem("companys"));
+      } else {
+        return state.companys;
+      }
+    },
+  },
   mutations: {
     getCompanysMutation(state, payload) {
       // console.log("getCompanysMutation payload", payload);
       state.companys = payload;
+      localStorage.setItem("companys", JSON.stringify(payload));
     },
     setCompanysMutation(state, payload) {
       // console.log("setCompanysMutation payload", payload);

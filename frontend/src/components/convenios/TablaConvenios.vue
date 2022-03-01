@@ -243,7 +243,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapGetters } from "vuex";
 import AddModal from "./AddModal.vue";
 import InfoModal from "./InfoModal.vue";
 
@@ -301,7 +301,9 @@ export default {
 
   computed: {
     ...mapState("access", ["user_data"]),
-    ...mapState("convenios", ["convenios"]),
+    ...mapGetters("convenios", {
+      convenios: "conveniosGet",
+    }),
     sortOptions() {
       // Create an options list from our fields
       return this.fields

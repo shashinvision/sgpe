@@ -243,7 +243,7 @@
 <script>
 import InfoModalUsuarios from "./InfoModalUsuarios.vue";
 import AddModalUsuario from "./AddModalUsuario.vue";
-import { mapState, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "SgpeUsuarios",
   components: { InfoModalUsuarios, AddModalUsuario },
@@ -314,7 +314,9 @@ export default {
     };
   },
   computed: {
-    ...mapState("usuarios", ["usuarios"]),
+    ...mapGetters("usuarios", {
+      usuarios: "usuariosGet",
+    }),
     sortOptions() {
       // Create an options list from our fields
       return this.fields

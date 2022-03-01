@@ -10,10 +10,20 @@ const usuarios = {
     },
     usuarios: {},
   },
+  getters: {
+    usuariosGet(state) {
+      if (state.usuarios.length === 0) {
+        return JSON.parse(localStorage.getItem("usuarios"));
+      } else {
+        return state.usuarios;
+      }
+    },
+  },
   mutations: {
     getUsuariosMutation(state, payload) {
       // console.log("getUsuariosMutation payload", payload);
       state.usuarios = payload;
+      localStorage.setItem("usuarios", JSON.stringify(payload));
     },
     setUsuariosMutation(state, payload) {
       // console.log("setUsuariosMutation payload", payload);
