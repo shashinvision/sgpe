@@ -246,6 +246,7 @@
 import { mapActions, mapState, mapGetters } from "vuex";
 import AddModal from "./AddModal.vue";
 import InfoModal from "./InfoModal.vue";
+import { baseURL } from "../../store/globalData";
 
 export default {
   components: { AddModal, InfoModal },
@@ -353,7 +354,7 @@ export default {
     },
     storageUrl(data) {
       const arreglo = data.split("/");
-      return "http://localhost:8888/storage/" + arreglo[1];
+      return `${baseURL}/storage/${arreglo[1]}`;
     },
     datosTabla() {
       this.getConvenios();
