@@ -24,7 +24,7 @@
             <b-form-checkbox
               value="company"
               v-if="user_data.id_permissions === 1"
-              >Perfil Empresa</b-form-checkbox
+              >Perfil empresa</b-form-checkbox
             >
           </b-form-checkbox-group>
         </b-form-group>
