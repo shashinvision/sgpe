@@ -25,7 +25,7 @@
         ></b-form-input>
       </b-col>
       <b-col sm="2">
-        <label for="companys" size="sm">Compañias:</label>
+        <label for="companys" size="sm">Empresas:</label>
       </b-col>
       <b-col sm="10">
         <b-form-select
@@ -36,7 +36,7 @@
           <!-- This slot appears above the options from 'options' prop -->
           <template #first>
             <b-form-select-option :value="null" disabled
-              >-- Compañias --</b-form-select-option
+              >-- Empresas --</b-form-select-option
             >
           </template>
         </b-form-select>
