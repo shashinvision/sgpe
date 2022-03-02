@@ -280,6 +280,9 @@ export default {
           sortByFormatted: true,
           filterByFormatted: true,
         },
+        {
+          // posición 3 reservada en caso que el administrador hagan login, para ver el nombre del perfil delas empresas en el created
+        },
         { key: "actions", label: "Actions" },
       ],
       totalRows: 1,
@@ -320,6 +323,15 @@ export default {
   },
   created() {
     this.datosTabla();
+
+    if (this.user_data.id_permissions === 1) {
+      this.fields[3] = {
+        key: "company",
+        label: "Compañia",
+        sortable: true,
+        sortDirection: "desc",
+      };
+    }
   },
   mounted() {
     /*
