@@ -155,7 +155,8 @@ const usuarios = {
         });
     },
     async perfilUpdateAction({ commit, state }, payload) {
-      console.log("perfilUpdateAction payload", payload);
+      // console.log("perfilUpdateAction payload", payload);
+
       const data = {
         name: payload.name,
         passwordOld: payload.passwordOld,
@@ -176,8 +177,11 @@ const usuarios = {
           return res.json();
         })
         .then((payload) => {
-          // console.log("Respuesta insert", payload);
-
+          // Edito el nombre de usuario con un action del store access para que se refleje en el perfil de forma reactiva
+          store._modules.root.context.dispatch(
+            "access/updateNameUserAction",
+            data.name
+          );
           commit("setUsuariosMutation", payload);
         })
         .catch((err) => {

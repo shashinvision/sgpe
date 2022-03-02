@@ -38,12 +38,15 @@ const access = {
     },
     logoutMutation(state) {
       state.auth = false;
-      state.username = null;
+      state.user_data = null;
     },
     signinMutation(state, payload) {
       // console.log("respuesta signinMutation", payload);
 
       state.message = payload.message;
+    },
+    updateNameUserMutation(state, payload) {
+      state.user_data.name = payload;
     },
   },
   actions: {
@@ -120,6 +123,9 @@ const access = {
         .catch(function (err) {
           console.error("Error al intentar ingresar", err);
         });
+    },
+    updateNameUserAction({ commit }, payload) {
+      commit("updateNameUserMutation", payload);
     },
   },
 };
