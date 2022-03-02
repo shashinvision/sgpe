@@ -21,6 +21,11 @@
             <b-form-checkbox value="id">ID</b-form-checkbox>
             <b-form-checkbox value="name">Nombre</b-form-checkbox>
             <b-form-checkbox value="isActive">Estado</b-form-checkbox>
+            <b-form-checkbox
+              value="company"
+              v-if="user_data.id_permissions === 1"
+              >Perfil Empresa</b-form-checkbox
+            >
           </b-form-checkbox-group>
         </b-form-group>
       </b-col>
@@ -327,7 +332,7 @@ export default {
     if (this.user_data.id_permissions === 1) {
       this.fields[3] = {
         key: "company",
-        label: "Compañia",
+        label: "Perfil empresa",
         sortable: true,
         sortDirection: "desc",
       };
