@@ -150,6 +150,10 @@
               {{ key }}: {{ value }}
             </li> -->
             <ul>
+              <li v-if="user_data.id_permissions === 1">
+                <b>Perfil empresa: </b>
+                {{ row.item.company || "Sin información" }}
+              </li>
               <li>
                 <b>Nombre Empresa: </b>
                 {{ row.item.name || "Sin información" }}
