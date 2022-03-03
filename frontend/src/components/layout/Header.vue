@@ -41,8 +41,11 @@
           </template>
           <b-dropdown-item to="/Perfil">Perfil</b-dropdown-item>
           <b-dropdown-item to="/">Convenios</b-dropdown-item>
-          <b-dropdown-item v-if="user_data.id_permissions === 1">
-            <router-link :to="{ name: 'Admin' }">Administración</router-link>
+          <b-dropdown-item
+            v-if="user_data.id_permissions === 1"
+            :to="{ name: 'Admin' }"
+          >
+            Administración
           </b-dropdown-item>
           <b-dropdown-item v-if="auth" @click="logoutNow"
             >Cerrar sesión</b-dropdown-item
