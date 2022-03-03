@@ -328,7 +328,6 @@ export default {
   },
   created() {
     this.datosTabla();
-
     if (this.user_data.id_permissions === 1) {
       this.fields[3] = {
         key: "company",
@@ -339,14 +338,14 @@ export default {
     }
   },
   mounted() {
-    /*
-     ? importante
-     * Con el setTimeOut soluciono el problema de la reactividad del paso de los valores
-     *  de la props, se puede con una propiedad computada, pero inicia primero como objeto lo
-     * que genera error, por lo que un setTimeOut no genera este error si el primera valor es
-     * un arreglo vacío
-     */
-    this.datosTabla();
+    if (
+      this.convenios.length == undefined ||
+      this.convenios.length == null ||
+      this.convenios.length == 0
+    ) {
+      this.datosTabla();
+      console.log("Carga secundaria convenios");
+    }
   },
   methods: {
     ...mapActions("convenios", {
@@ -377,8 +376,8 @@ export default {
       const arreglo = data.split("/");
       return `${baseURL}/storage/${arreglo[1]}`;
     },
-    datosTabla() {
-      this.getConvenios();
+    async datosTabla() {
+      await this.getConvenios();
       setTimeout(() => {
         this.items = this.convenios;
         // Set the initial number of items
