@@ -338,14 +338,13 @@ export default {
     }
   },
   mounted() {
-    if (
-      this.convenios.length == undefined ||
-      this.convenios.length == null ||
-      this.convenios.length == 0
-    ) {
-      this.datosTabla();
-      console.log("Carga secundaria convenios");
-    }
+    // if (
+    //   this.convenios.length == undefined ||
+    //   this.convenios.length == 0
+    // ) {
+    //   this.datosTabla();
+    //   console.log("Carga secundaria convenios");
+    // }
   },
   methods: {
     ...mapActions("convenios", {

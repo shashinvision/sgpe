@@ -12,7 +12,7 @@ const usuarios = {
   },
   getters: {
     usuariosGet(state) {
-      if (state.usuarios.length === 0) {
+      if (state.usuarios.length == undefined || state.usuarios.length === 0) {
         return JSON.parse(localStorage.getItem("usuarios"));
       }
       return state.usuarios;

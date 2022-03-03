@@ -12,7 +12,7 @@ const companys = {
   },
   getters: {
     companysGet(state) {
-      if (state.companys.length === 0) {
+      if (state.companys.length == undefined || state.companys.length === 0) {
         return JSON.parse(localStorage.getItem("companys"));
       }
       return state.companys;
