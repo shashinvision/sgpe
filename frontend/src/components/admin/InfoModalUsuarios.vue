@@ -6,8 +6,8 @@
     @hide="resetInfoModal"
   >
     <!-- <pre>{{ infoModal.name }}</pre> -->
-    <b-button variant="info" class="mr-5" @click="verForm"> editar </b-button>
-    <b-button variant="danger" @click="deleteItem"> eliminar </b-button>
+    <b-button variant="info" class="mr-5" @click="verForm"> Editar </b-button>
+    <b-button variant="danger" @click="deleteItem"> Eliminar </b-button>
     <FormAddEditUsuario
       v-if="formActivo"
       :infoModal="infoModal"
