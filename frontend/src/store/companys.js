@@ -13,6 +13,7 @@ const companys = {
   getters: {
     companysGet(state) {
       if (state.companys.length == undefined || state.companys.length === 0) {
+        console.log("Carga desde el localStorage companys");
         return JSON.parse(localStorage.getItem("companys"));
       }
       return state.companys;
