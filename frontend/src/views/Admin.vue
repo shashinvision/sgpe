@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="text-center">
+  <b-container id="contenedor" fluid class="text-center">
     <main class="form-signin">
       <h1 class="h2 mb-3 fw-normal">Panel de administración</h1>
 
@@ -78,5 +78,15 @@ body {
   max-width: 100%;
   padding: 15px;
   margin: auto;
+}
+
+@media screen and (max-width: 375px) {
+  main,
+  #contenedor {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
 }
 </style>
