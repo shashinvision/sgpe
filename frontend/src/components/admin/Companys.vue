@@ -310,7 +310,14 @@ export default {
   },
   mounted() {
     // Set the initial number of items
-    this.datosTabla();
+    if (
+      this.companys.length == undefined ||
+      this.companys.length == null ||
+      this.companys.length == 0
+    ) {
+      this.datosTabla();
+      console.log("Carga secundaria companys");
+    }
   },
   methods: {
     ...mapActions("companys", {

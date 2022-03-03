@@ -331,7 +331,14 @@ export default {
   },
   mounted() {
     // Set the initial number of items
-    this.datosTabla();
+    if (
+      this.usuarios.length == undefined ||
+      this.usuarios.length == null ||
+      this.usuarios.length == 0
+    ) {
+      this.datosTabla();
+      console.log("Carga secundaria usuarios");
+    }
   },
   methods: {
     ...mapActions("usuarios", {
