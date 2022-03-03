@@ -12,7 +12,10 @@ const convenios = {
   },
   getters: {
     conveniosGet(state) {
-      if (state.convenios.length == undefined || state.convenios.length === 0) {
+      if (
+        state.convenios.length === undefined ||
+        state.convenios.length === 0
+      ) {
         console.log("Carga desde el localStorage convenios");
         return JSON.parse(localStorage.getItem("convenios"));
       }
