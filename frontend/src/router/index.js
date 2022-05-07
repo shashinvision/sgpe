@@ -64,7 +64,9 @@ router.beforeEach((to, from, next) => {
       // En caso que nuestro Vuex esté segmentado
       next();
     } else {
+      alert("Error al ingresar, favor intente nuevamente.");
       next({ name: "Login" });
+
     }
   } else {
     next();
