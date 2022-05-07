@@ -508,7 +508,7 @@ services:
 
   ### MySQL ################################################
   mysql:
-    # platform: linux/x86_64 # Solo para casos como en el Chip M1 Mac
+  #platform: linux/x86_64 # Solo para casos como en el Chip M1 Mac
     build:
       context: ./mysql
       args:
