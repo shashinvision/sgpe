@@ -56,10 +56,12 @@ docker-compose exec workspace bash
 
 ```
 composer install
+composer update
 ```
 
 ```
 php artisan migrate
+php artisan key:generate
 ```
 
 ```
