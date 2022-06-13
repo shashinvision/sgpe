@@ -65,7 +65,7 @@ class UsuariosController extends Controller
             'password' => bcrypt($request->password),
             'state' => $request->state
         ]);
-        return json_encode("Empresa creado con éxito.");
+        return json_encode("Usuario creado con éxito.");
     }
 
     /**
