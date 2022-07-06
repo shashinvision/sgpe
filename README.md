@@ -124,6 +124,30 @@ npm install
 npm run serve
 ```
 
+### Tambien podemos hacer un compilado build donde todo quedara en la carpeta dist
+```
+npm run build
+```
+## Para ejecutarlo debemos tener instalado serve
+```
+npm install -g serve
+```
+##  luego en la carpeta frontend ejecutamos
+```
+serve -s dist
+```
+## En caso de existir un error 404 por vue router creamos dentro de la carpeta dist:
+```
+touch dist/serve.json
+```
+## Pegamos el siguiente contenido y listo, volvemos al comando serve -s dist dentro de frontend
+```
+{
+  "rewrites": [{ "source": "/**", "destination": "/index.html" }]
+}
+
+```
+
 # nos indicará la dirección y puerto local y externo para su visualización.
 
 # Ejemplo http://localhost:8080/
